@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>admin dashboard</title>
+    <link rel="stylesheet" href="admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        <div class="top-list">
+          <div class="logo-box">
+            <img src="images/parsfinance_logo-removebg-preview.png" alt="" />
+            <h1>Parsfinance</h1>
+          </div>
+          <i class="fa-solid fa-x"></i>
+        </div>
+        <ul class="navlist">
+          <li class="list active">
+            <a href="#">
+            <i class="fa-solid fa-grip"></i>
+              <h3>Dashboard</h3>
+            </a>
+          </li>
+          <li class="list">
+            <a href="#">
+              <i class="fa-solid fa-wallet"></i>
+              <h3>My Wallet</h3>
+            </a>
+          </li>
+          <li class="list">
+            <a href="#">
+              <i class="fa-solid fa-arrow-right-arrow-left"></i>
+              <h3>Transaction</h3>
+            </a>
+          </li>
+          <li class="list">
+            <a href="#">
+              <i class="fa-solid fa-receipt"></i>
+              <h3>Invocies</h3>
+            </a>
+          </li>
+          <li class="list">
+            <a href="#">
+              <i class="fa-solid fa-credit-card"></i>
+              <h3>cards</h3>
+            </a>
+          </li>
+          <li class="list">
+            <a href="#">
+              <i class="fa-solid fa-gear"></i>
+              <h3>Setting</h3>
+            </a>
+          </li>
+          <li class="list">
+            <a href="#">
+              <i class="fa-solid fa-shield"></i>
+              <h3>Security</h3>
+            </a>
+          </li>
+          <li class="list">
+            <a href="#">
+              <i class="fa-solid fa-circle-info"></i>
+              <h3>Help center</h3>
+            </a>
+          </li>
+          <li class="logout">
+            <a href="#">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <h3>logout</h3>
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <main>
+        <div class="topSearch">
+          <div class="switch-theme">
+            <div class="switch-icons">
+              <span class="sun active">
+                <i class="fa-solid fa-sun"></i>
+              </span>
+              <span class="moon">
+                <i class="fa-solid fa-moon"></i>
+              </span>
+            </div>
+          </div>
+          <div class="searchBox">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search" />
+          </div>
+        </div>
+
+        <div class="details-box">
+          <div class="content">
+            <div class="income">
+              <div class="left-content">
+                <div class="badge">
+                  <i class="fa-solid fa-left-long"></i>
+                </div>
+                <div class="info">
+                  <span>Income</span>
+                  <h4>$23,455</h4>
+                </div>
+              </div>
+
+              <div class="right-content">
+                <div class="top">
+                  <i class="fa-solid fa-square-caret-down"></i>
+                  <p>- 0.3 %</p>
+                </div>
+                <span>30 days</span>
+              </div>
+            </div>
+
+            <div>
+             <canvas id="myChartOne" height="100ppx"></canvas>
+            </div>
+          </div>
+
+          <div class="content">
+            <div class="outcome">
+              <div class="left-content">
+                <div class="badge">
+                  <i class="fa-solid fa-left-long"></i>
+                </div>
+                <div class="info">
+                  <span>Outcome</span>
+                  <h4>$74,645</h4>
+                </div>
+              </div>
+
+              <div class="right-content">
+                <div class="top">
+                  <i class="fa-solid fa-square-caret-up"></i>
+                  <p>+ 0.5 %</p>
+                </div>
+                <span>30 days</span>
+              </div>
+            </div>
+
+            <div>
+             <canvas id="myChartOne" height="100px"></canvas>
+            </div>
+          </div>
+        </div>
+      </main>
+      <div class="right">3</div>
+    </div>
+
+    <!-- CHART JS LINK -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

@@ -5,6 +5,7 @@
   font-family: sans-serif;
   text-decoration: none;
   list-style: none;
+  scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar {
@@ -297,8 +298,7 @@ aside .navlist li.logout {
 .info h4 {
   font-size: 1.1rem;
   font-weight: 600;
-  color:var(--dark-color) ;
-
+  color: var(--dark-color);
 }
 
 .top i {
@@ -315,6 +315,91 @@ aside .navlist li.logout {
 .info h4 {
   font-size: 2rem;
 }
+
+canvas {
+  width: 100% !important;
+}
+
+/* WEEEK CHART */
+
+.chartBox {
+  background-color: var(--white-color);
+  border-radius: 15px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.chartBox .main-text{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(129, 88, 252, 0.1);
+}
+
+.legend-box button{
+  background: none;
+  border: none;
+  margin-right: .5rem;
+  font-size: .8rem;
+  font-weight: 500;
+  border-radius: 5px;
+  color: var(--dark-color);
+  cursor: pointer;
+}
+
+.legend-box button.first{
+  background: var(--main-color);
+  transition: all .4s ease;
+  padding: 9px 10px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.legend-box button.first:hover{
+  background: #5629df;
+}
+
+.legend-box button.second{
+  background: var(--orange-color);
+  transition: all .4s ease;
+  padding: 9px 10px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.legend-box button.second:hover{
+  background: #eca127;
+}
+
+.main-text .legend-box span{
+  font-size: .8rem;
+  font-weight: 500;
+  padding: 9px 10px;
+  box-shadow: rgba(0,0,0,0.1)0 1px 3px 0, rgba(0,0,0,0.06)0 1px 2px 0px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--dark-color);
+}
+
+.main-text .legend-box span i{
+  font-size: .6rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 main {
   background: #ffffff00;

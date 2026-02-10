@@ -26,7 +26,7 @@
         <ul class="navlist">
           <li class="list active">
             <a href="#">
-            <i class="fa-solid fa-grip"></i>
+              <i class="fa-solid fa-grip"></i>
               <h3>Dashboard</h3>
             </a>
           </li>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="info">
                   <span>Income</span>
-                  <h4>$23,455</h4>
+                  <h4>₦00.0</h4>
                 </div>
               </div>
 
@@ -121,7 +121,7 @@
             </div>
 
             <div>
-             <canvas id="myChartOne" height="100ppx"></canvas>
+              <canvas id="myChartOne" height="100ppx"></canvas>
             </div>
           </div>
 
@@ -133,7 +133,7 @@
                 </div>
                 <div class="info">
                   <span>Outcome</span>
-                  <h4>$74,645</h4>
+                  <h4>₦00.0</h4>
                 </div>
               </div>
 
@@ -147,10 +147,39 @@
             </div>
 
             <div>
-             <canvas id="myChartOne" height="100px"></canvas>
+              <canvas id="myChartTwo" height="100ppx"></canvas>
             </div>
           </div>
         </div>
+
+        <div class="chartBox">
+          <div class="main-text">
+            <h2>Overflow</h2>
+            <div class="legend-box">
+              <button onclick="toggleData(0)" class="first">This week</button>
+              <button onclick="toggleData(1)" class="second">Last week</button>
+              <span>week <i class="fa-solid fa-square-caret-down"></i></span>
+            </div>
+          </div>
+
+          <div>
+            <canvas id="myChartThree" height="250ppx"></canvas>
+          </div>
+        </div>
+
+         <div class="chartBox">
+          <div class="main-text">
+            <h2>Activity</h2>
+            <div class="legend-box">
+              <span>week <i class="fa-solid fa-square-caret-down"></i></span>
+            </div>
+          </div>
+
+          <div>
+            <canvas id="myChartThree" height="250ppx"></canvas>
+          </div>
+        </div>
+
       </main>
       <div class="right">3</div>
     </div>

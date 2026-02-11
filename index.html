@@ -5,13 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mimi market</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
     <nav class="navbar">
@@ -19,10 +13,13 @@
       <div class="nav-actions">
         <button id="openModal" class="btn-primary">Post Ad</button>
       </div>
+      <div class="user_icon">
+        <a href=""><i class="fa-solid fa-user-check"></i></a>
+      </div>
     </nav>
 
     <header class="hero">
-      <h1>Find Your Next <span>Big Deal</span></h1>
+      <h1>What are you<span> looking for?</span></h1>
       <div class="search-container">
         <input
           type="text"
@@ -45,15 +42,17 @@
       </aside>
 
       <section class="feed">
-        <h2 id="feedTitle">Featured Ads</h2>
+        <h2 id="feedTitle" class="feed_head">Featured Ads</h2>
+       
         <div class="ads-grid" id="adsGrid"></div>
+        
       </section>
     </div>
 
     <div id="adModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Post a New Ad</h2>
+        <h2 class="modal_head">Post a New Ad</h2>
         <form id="adForm">
           <input type="text" id="adTitle" placeholder="Ad Title" required />
           <input type="number" id="adPrice" placeholder="Price ($)" required />
@@ -62,6 +61,7 @@
             <option value="Services">Services</option>
             <option value="Real Estate">Real Estate</option>
           </select>
+          
           <textarea id="adDesc" placeholder="Description" rows="4"></textarea>
           <button type="submit" class="btn-primary">Publish Now</button>
           <label for="adImage">Upload Item Photo:</label>

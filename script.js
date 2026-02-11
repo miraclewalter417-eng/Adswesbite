@@ -158,14 +158,13 @@ function removeAdItem() {
   //
   console.log(event.target.parentElement.id);
   // event.target.parentElement.remove();
-  
+
   const latestAds = ads.filter((ad) => ad.id != event.target.parentElement.id);
   localStorage.setItem("myAds", JSON.stringify(latestAds));
   // loadAds()
   console.log({ latestAds });
   ads = latestAds;
-  
+
   renderAds();
 }
 let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-.alert('successfully deleted');

@@ -120,3 +120,32 @@ function toggleData(value) {
     myChartnew.show(value);
   }
 }
+
+// HALF DOUGHNUT JS
+
+const ctxFour = document.getElementById("myChartFour");
+
+new Chart(ctxFour, {
+  type: "doughnut",
+  data: {
+    labels: ["Monthly", "Groceries", "subscribing", "Tax", "Other"],
+    datasets: [
+      {
+        label: "Percent",
+        data: [26, 34, 10, 15, 15],
+        borderWidth: 1,
+        circumference: 180,
+        rotation:270,
+      },
+    ],
+  },
+  options: {
+   maintainAspectRatio:false,
+   aspectRatio:1,
+   plugins:{
+    legend:{
+      display:false,
+    }
+   }
+  },
+});

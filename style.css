@@ -347,7 +347,6 @@ body {
 
   .logo{
     font-size: 1em;
-    /* width: 30%; */
   }
 
   .feed_head{
@@ -358,9 +357,8 @@ body {
     padding: 10px;
     position: sticky;
     top: 0;
-    /* margin: 5px; */
   }
-
+  
   .btn-primary{
     width: 90%;
     text-align: center;

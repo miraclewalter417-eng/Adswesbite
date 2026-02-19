@@ -6,7 +6,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #8158fc, #1e293b);
+  background: linear-gradient( #8158fc);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +18,7 @@ body {
   width: 350px;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.99);
 }
 
 h2 {
@@ -77,4 +77,10 @@ button:hover {
   margin-bottom: 10px;
   font-size: 14px;
   color: red;
+}
+
+@media (max-width: 425px) {
+    .container {
+    width: 100%;
+  }
 }

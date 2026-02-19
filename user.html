@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="user.css" />
+    <title>user interface</title>
+  </head>
+  <body>
+    <main class="main-content">
+      <header class="top-header">
+        <h1>Welcome, Username 👋</h1>
+        <div class="header-actions">
+          <button class="edit-btn">Edit Profile</button>
+          <a href="register.html"
+            ><button class="logout-btn">Log Out</button></a
+          >
+        </div>
+      </header>
+
+      <!-- Dark Mode -->
+      <div class="toggle-mode">
+        <label>
+          <input type="checkbox" id="themeToggle" />
+          Dark Mode
+        </label>
+      </div>
+
+      <!-- Profile -->
+      <section class="profile-card">
+        <img src="images/hacker pics.jpg" alt="User" />
+        <div>
+          <h3>Walter Miracle</h3>
+          <p>Email: walter@email.com</p>
+          <p>Account Type: Advertiser</p>
+        </div>
+      </section>
+
+      <!-- Balance -->
+      <section class="balance-section">
+        <div class="balance-card">
+          <h3>Account Balance</h3>
+          <h2>₦25,000</h2>
+          <div class="balance-buttons">
+            <button id="depositBtn">Deposit</button>
+            <button id="withdrawBtn">Withdraw</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section class="ads-overview">
+        <div class="card">
+          <h3>Active Ads</h3>
+          <p>3 Running</p>
+        </div>
+        <div class="card">
+          <h3>Total Clicks</h3>
+          <p>1,245</p>
+        </div>
+        <div class="card">
+          <h3>Total Impressions</h3>
+          <p>18,430</p>
+        </div>
+      </section>
+
+      <!-- Transactions -->
+      <section class="transactions">
+        <h2>Recent Transactions</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="transactionTable">
+            <tr>
+              <td>18 Feb 2026</td>
+              <td>Deposit</td>
+              <td>₦10,000</td>
+              <td class="success">Completed</td>
+            </tr>
+            <tr>
+              <td>17 Feb 2026</td>
+              <td>Ad Payment</td>
+              <td>-₦5,000</td>
+              <td class="pending">Pending</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Create Ad -->
+      <section class="create-ad">
+        <h2>Create New Ad</h2>
+        <input type="text" id="adTitle" placeholder="Ad Title" />
+        <input type="number" id="adBudget" placeholder="Ad Budget (₦)" />
+        <button id="createAdBtn">Launch Ad</button>
+        <div id="adList"></div>
+      </section>
+
+      <!-- Referral -->
+      <section class="referral">
+        <h2>Referral Program</h2>
+        <p>Your Referral Link:</p>
+        <input
+          type="text"
+          value="https://mimiadsmarket.com/ref/user123"
+          readonly
+        />
+        <p>Total Referral Earnings: <strong id="refEarnings">₦5,000</strong></p>
+      </section>
+
+      <!-- Analytics -->
+      <section class="analytics">
+        <h2>Ad Performance</h2>
+        <canvas id="adChart"></canvas>
+      </section>
+
+      <!-- Withdraw Modal -->
+      <div class="modal" id="withdrawModal">
+        <div class="modal-content">
+          <h3>Request Withdrawal</h3>
+          <input type="number" id="withdrawAmount" placeholder="Enter Amount" />
+          <button id="confirmWithdraw">Submit</button>
+          <button onclick="closeWithdraw()">Cancel</button>
+        </div>
+      </div>
+
+      <div id="notification" class="notification"></div>
+
+      <div class="dashboard">
+        <aside class="sidebar">...</aside>
+        <main class="main-content">...</main>
+      </div>
+
+      <!-- <img src="images/hacker pics.jpg" alt="User" /> -->
+
+      <div class="modal" id="withdrawModal">
+        <div class="modal-content">
+          <h3>Request Withdrawal</h3>
+          <input type="number" id="withdrawAmount" placeholder="Enter Amount" />
+          <button id="confirmWithdraw">Submit</button>
+          <button onclick="closeWithdraw()">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Deposit Modal -->
+      <div class="modal" id="depositModal">
+        <div class="modal-content">
+          <h3>Deposit Funds</h3>
+          <input type="number" id="depositAmount" placeholder="Enter Amount" />
+          <button id="confirmDeposit">Submit</button>
+          <button onclick="closeDepositModal()">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Withdraw Modal -->
+      <div class="modal" id="withdrawModal">
+        <div class="modal-content">
+          <h3>Request Withdrawal</h3>
+          <input type="number" id="withdrawAmount" placeholder="Enter Amount" />
+          <button id="confirmWithdraw">Submit</button>
+          <button onclick="closeWithdraw()">Cancel</button>
+        </div>
+      </div>
+
+      <!-- Edit Profile Modal (Placeholder) -->
+      <div class="modal" id="editProfileModal">
+        <div class="modal-content">
+          <h3>Edit Profile</h3>
+          <input type="text" placeholder="Full Name" />
+          <input type="email" placeholder="Email" />
+          <button onclick="showNotification('Profile updated!')">Save</button>
+          <button
+            onclick="
+              document.getElementById('editProfileModal').style.display = 'none'
+            "
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <!-- Notification -->
+      <div id="notification" class="notification"></div>
+    </main>
+
+    <script src="user.js"></script>
+  </body>
+</html>

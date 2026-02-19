@@ -405,52 +405,44 @@ canvas {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
-.info-box .legend-box{
+.info-box .legend-box {
   display: flex;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
   cursor: pointer;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 main {
   background: #ffffff00;
 }
 
+/* RIGHT SIDE CSS */
+
 .right {
-  background: rgba(83, 76, 76);
+  margin: 1rem 0;
 }
 
-/* .right  img{
-  width: 100%;
-
+.header-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.section img{
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-} */
+.profile .pic img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+.menuIcon {
+  display: inline-flex;
+}
+
+.menuIcon i {
+  cursor: pointer;
+  color: var(--dark-color);
+  font-size: 2.2rem;
+}

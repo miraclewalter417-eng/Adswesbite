@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>register</title>
+        <link rel="stylesheet" href="register.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+
+        <section>
+    <div class="container">
+        
+        <h2 id="formTitle">Login</h2>
+        <div class="message" id="message"></div>
+        
+        <input type="text" id="name" placeholder="Full Name" style="display:none;">
+      <input type="email" id="email" placeholder="Email">
+      
+      <div class="password-wrapper">
+          <input type="password" id="password" placeholder="Password">
+        <span class="show-pass" onclick="togglePassword()"><i class="fa-solid fa-eye-slash"></i></span>
+      </div>
+    
+      <button id="submitBtn">Login</button>
+    
+      <div class="toggle" onclick="toggleForm()">
+          Don't have an account? Register
+        </div>
+        <a href="index.html"><button>Back to homepage</button></a>
+    </div>
+</section>
+    <script src="register.js"></script>
+</body>
+</html>

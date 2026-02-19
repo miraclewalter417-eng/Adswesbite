@@ -31,11 +31,11 @@ window.onclick = (e) => {
 
 // Simple Search
 
-function searchAds() {
-  const term = document.getElementById("searchInput").value.toLowerCase();
-  const filtered = ads.filter((ad) => ad.title.toLowerCase().includes(term));
-  renderAds(filtered);
-}
+// function searchAds() {
+//   const term = document.getElementById("searchInput").value.toLowerCase();
+//   const filtered = ads.filter((ad) => ad.title.toLowerCase().includes(term));
+//   renderAds(filtered);
+// }
 
 // Category Filter
 
@@ -46,19 +46,22 @@ function filterCategory(cat) {
 }
 
 async function searchAds() {
-  const term = document.getElementById("searchInput").value;
-  const cat = document.querySelector(".active-category")?.innerText || "All";
-
+  let term = document.getElementById("searchInput").value;
+  let cat = document.querySelector(".active-category")?.innerText || "All";
   // This calls the server with specific "query parameters"
   try {
-    const response = await fetchProducts(
-      `${"https:fakestoreapi.com/products"}`,
+    const response = await fetch(API_URL)(
+      "https://api.professional-service.com/data    ",
     );
-    const data = await response.json();
+    const products = await response.json();
+    console.log(products);
+    searchAds(products);
     // renderAds(filteredAds);
   } catch (error) {
     console.error("error fetching products:", error);
+    alert("Could not load products. Please check your connection.");
   }
+  getproducts();
 }
 
 // Render Ads to Screen
@@ -80,7 +83,7 @@ adForm.addEventListener("submit", (e) => {
   const newAd = {
     id: Date.now(),
     title: document.getElementById("adTitle").value,
-    price: document.getElementById("adPrice").value,
+    price: document.getElementById("adPrice").value.toString(),
     category: document.getElementById("adCategory").value,
     desc: document.getElementById("adDesc").value,
   };
@@ -97,39 +100,42 @@ adForm.addEventListener("submit", (e) => {
 
 // Start
 
-renderAds(ads);
+// renderAds(ads);
 
-// reader.onload = async function (event) {
-//   const img = new Image();
-//   img.src = event.target.result;
+// ADS IMG
 
-//   img.onload = async function () {
-//     const canvas = document.createElement("canvas");
-//     const MAX_WIDTH = 800;
-//     const scaleSize = MAX_WIDTH / img.width;
-//     canvas.width = MAX_WIDTH;
-//     canvas.height = img.height * scaleSize;
+reader.onload = async function (event) {
+  const img = new Image();
+  img.src = event.target.result;
 
-//     const ctx = canvas.getContext("2d");
-//     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  img.onload = async function () {
+    const canvas = document.createElement("canvas");
+    const MAX_WIDTH = 800;
+    const scaleSize = MAX_WIDTH / img.width;
+    canvas.width = MAX_WIDTH;
+    canvas.height = img.height * scaleSize;
 
-//     // Convert to a smaller JPEG instead of a heavy PNG
-//     const compressedBase64 = canvas.toDataURL("image/jpeg", 0.7);
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-//     const adData = {
-//       title: document.getElementById("adTitle").value,
-//       image: compressedBase64,
-//       // ... other fields
-//     };
+    // Convert to a smaller JPEG instead of a heavy PNG
+    const compressedBase64 = canvas.toDataURL("image/png", 0.7);
 
-//     await fetch(API_URL, {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(adData),
-//     });
-//     loadAds();
-//   };
-// };
+    const adData = {
+      title: document.getElementById("adTitle").value,
+      image: compressedBase64,
+      // ... other fields
+    };
+
+    //   await fetch(API_URL, {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(adData),
+    //   });
+    //   loadAds();
+    // };
+  };
+};
 
 function cardItem(ad) {
   const adItem = document.createElement("div");
@@ -140,8 +146,14 @@ function cardItem(ad) {
   const adInfo = document.createElement("div");
   adInfo.classList.add("ad-info");
   adInfo.innerHTML = `<small>${ad.category}</small>
-  <h3>${ad.title}</h3>
-  <p class="ad-price">$${ad.price}</p>`;
+  <h3>${ad.title}</h3>`;
+  // <p class="ad-price">$${ad.price.toString().toLocaleString()}</p>`;
+  const price = document.createElement("p");
+  // console.log(typeof ad.price);
+  console.log(ad.price.toLocaleString("en-US"));
+  price.textContent = "$" + Number(ad.price).toLocaleString("en-US");
+  price.classList.add("ad-price");
+  adInfo.appendChild(price);
   const adRmBtn = document.createElement("button");
   adRmBtn.innerText = "Remove Item";
   adRmBtn.classList.add("ad-removeBtn");
@@ -168,3 +180,28 @@ function removeAdItem() {
   renderAds();
 }
 let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+// Newsletter form alert
+document.getElementById("newsletterForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  alert("Thank you for subscribing!");
+  this.reset();
+});
+
+// Back to top button
+const backToTop = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTop.style.display = "block";
+  } else {
+    backToTop.style.display = "none";
+  }
+});
+
+backToTop.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});

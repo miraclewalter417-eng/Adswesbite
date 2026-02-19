@@ -370,4 +370,13 @@ body {
     width: auto;
     padding: 10px 20px;
   }
+
+  .modal_head{
+    width: 100%;
+    margin-left: 7px;
+  }
+  .modal-content{
+    width: 80%;
+    /* height: 100%; */
+  }
 }

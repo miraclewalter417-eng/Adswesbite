@@ -19,6 +19,7 @@ const notification = document.getElementById("notification");
 const themeToggle = document.getElementById("themeToggle");
 const editBtn = document.querySelector(".edit-btn");
 const createAdBtn = document.getElementById("createAdBtn");
+const refEarningsDisplay = document.getElementById("refEarnings");
 
 // ----------------------------
 // NOTIFICATION FUNCTION
@@ -36,11 +37,12 @@ function showNotification(message, type = "info") {
 if (themeToggle) {
   themeToggle.addEventListener("change", () => {
     document.body.classList.toggle("dark");
+    updateChartColors();
   });
 }
 
 // ----------------------------
-// DEPOSIT MODAL FUNCTIONS
+// DEPOSIT MODAL
 // ----------------------------
 if (depositBtn && depositModal && confirmDeposit) {
   depositBtn.addEventListener("click", () => {
@@ -63,21 +65,20 @@ if (depositBtn && depositModal && confirmDeposit) {
     }
   });
 
-  // Optional: close modal when clicking outside
   depositModal.addEventListener("click", (e) => {
     if (e.target === depositModal) closeDepositModal();
   });
 }
 
 // ----------------------------
-// WITHDRAW MODAL FUNCTIONS
+// WITHDRAW MODAL
 // ----------------------------
 if (withdrawBtn && withdrawModal && confirmWithdraw) {
   withdrawBtn.addEventListener("click", () => {
     withdrawModal.style.display = "flex";
   });
 
-  function closeWithdraw() {
+  function closeWithdrawModal() {
     withdrawModal.style.display = "none";
   }
 
@@ -87,14 +88,14 @@ if (withdrawBtn && withdrawModal && confirmWithdraw) {
       balance -= amount;
       balanceDisplay.textContent = "₦" + balance.toLocaleString();
       showNotification("Withdrawal Request Sent (Admin Approval Needed)");
-      closeWithdraw();
+      closeWithdrawModal();
     } else {
-      showNotification("Insufficient Balance", "error");
+      showNotification("Insufficient Balance or Invalid Amount", "error");
     }
   });
 
   withdrawModal.addEventListener("click", (e) => {
-    if (e.target === withdrawModal) closeWithdraw();
+    if (e.target === withdrawModal) closeWithdrawModal();
   });
 }
 
@@ -114,19 +115,6 @@ if (editBtn && editProfileModal) {
 
   editProfileModal.addEventListener("click", (e) => {
     if (e.target === editProfileModal) editProfileModal.style.display = "none";
-  });
-}
-
-// ----------------------------
-// LOGOUT
-// ----------------------------
-const logoutLi = document.querySelector(".sidebar ul li:last-child");
-if (logoutLi) {
-  logoutLi.addEventListener("click", () => {
-    showNotification("Logging out...");
-    setTimeout(() => {
-      window.location.href = "login.html";
-    }, 1000);
   });
 }
 
@@ -163,11 +151,19 @@ if (createAdBtn) {
 }
 
 // ----------------------------
+// REFERRAL DISPLAY
+// ----------------------------
+if (refEarningsDisplay) {
+  refEarningsDisplay.textContent = "₦" + referralEarnings.toLocaleString();
+}
+
+// ----------------------------
 // CHART.JS ANALYTICS
 // ----------------------------
+let adChart;
 const ctx = document.getElementById("adChart");
 if (ctx) {
-  new Chart(ctx, {
+  adChart = new Chart(ctx, {
     type: "line",
     data: {
       labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
@@ -204,5 +200,29 @@ if (ctx) {
         },
       },
     },
+  });
+}
+
+// Update chart colors when dark mode toggles
+function updateChartColors() {
+  if (!adChart) return;
+  const isDark = document.body.classList.contains("dark");
+  adChart.options.plugins.legend.labels.color = isDark ? "white" : "#000";
+  adChart.options.scales.x.ticks.color = isDark ? "white" : "#000";
+  adChart.options.scales.y.ticks.color = isDark ? "white" : "#000";
+  adChart.update();
+}
+
+// ----------------------------
+// OPTIONAL: LOGOUT (if sidebar exists)
+// ----------------------------
+const logoutLink = document.querySelector(".logout-btn");
+if (logoutLink) {
+  logoutLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    showNotification("Logging out...");
+    setTimeout(() => {
+      window.location.href = "register.html";
+    }, 1000);
   });
 }

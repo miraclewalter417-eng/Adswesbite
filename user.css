@@ -1,3 +1,4 @@
+/* ===================== RESET & BASE ===================== */
 * {
   margin: 0;
   padding: 0;
@@ -7,27 +8,29 @@
 
 body {
   background: #f4f6fb;
+  color: #121212;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
-/* Layout */
+/* ===================== DASHBOARD LAYOUT ===================== */
 .dashboard {
   display: flex;
   min-height: 100vh;
 }
 
-/* Sidebar */
+/* ===================== SIDEBAR ===================== */
 .sidebar {
   width: 240px;
   background: #8158fc;
   color: white;
   padding: 30px 20px;
+  transition: background 0.3s ease;
 }
 
-.logo {
-  margin-bottom: 40px;
-  font-size: 22px;
-  font-weight: bold;
-  color: white;
+body.dark .sidebar {
+  background: #6d46e8;
 }
 
 .sidebar ul {
@@ -35,25 +38,31 @@ body {
 }
 
 .sidebar ul li {
-  padding: 12px;
-  cursor: pointer;
-  border-radius: 8px;
   margin-bottom: 10px;
-  transition: 0.3s;
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
-.sidebar ul li:hover,
-.sidebar ul .active {
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li.active a {
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Main */
+/* ===================== MAIN CONTENT ===================== */
 .main-content {
   flex: 1;
   padding: 30px;
 }
 
-/* Header */
+/* ===================== HEADER ===================== */
 header {
   display: flex;
   justify-content: space-between;
@@ -74,7 +83,16 @@ header {
   background: #6d46e8;
 }
 
-/* Profile */
+/* ===================== DARK MODE TOGGLE ===================== */
+.toggle-mode {
+  margin-top: 20px;
+}
+
+.toggle-mode input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* ===================== PROFILE CARD ===================== */
 .profile-card {
   display: flex;
   align-items: center;
@@ -84,6 +102,12 @@ header {
   border-radius: 12px;
   gap: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .profile-card img {
@@ -91,9 +115,14 @@ header {
   height: 80px;
   object-fit: cover;
   border-radius: 50%;
+  transition: transform 0.3s ease;
 }
 
-/* Balance */
+.profile-card img:hover {
+  transform: scale(1.1);
+}
+
+/* ===================== BALANCE ===================== */
 .balance-section {
   margin-top: 30px;
 }
@@ -104,6 +133,11 @@ header {
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 5px 20px rgba(129, 88, 252, 0.3);
+}
+
+.balance-card h2 {
+  margin-top: 10px;
+  font-size: 28px;
 }
 
 .balance-card button {
@@ -134,7 +168,7 @@ header {
   background: #3b1573;
 }
 
-/* Stats */
+/* ===================== ADS OVERVIEW ===================== */
 .ads-overview {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -148,9 +182,15 @@ header {
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
-/* Table */
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ===================== TRANSACTIONS ===================== */
 .transactions {
   margin-top: 40px;
 }
@@ -167,6 +207,7 @@ table {
 th,
 td {
   padding: 14px;
+  text-align: left;
 }
 
 th {
@@ -181,11 +222,12 @@ tr:nth-child(even) {
 .success {
   color: green;
 }
+
 .pending {
   color: orange;
 }
 
-/* Create Ad / Referral / Analytics */
+/* ===================== CREATE AD / REFERRAL / ANALYTICS ===================== */
 .create-ad,
 .referral,
 .analytics {
@@ -194,9 +236,11 @@ tr:nth-child(even) {
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
 
-.create-ad input {
+.create-ad input,
+.referral input {
   display: block;
   margin-bottom: 10px;
   padding: 10px;
@@ -212,74 +256,23 @@ tr:nth-child(even) {
   color: white;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.3s;
 }
 
 .create-ad button:hover {
   background: #6d46e8;
 }
 
-/* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  justify-content: center;
-  align-items: center;
+.referral input[readonly] {
+  background: #f0f0f0;
+  cursor: not-allowed;
 }
 
-.modal-content {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  width: 320px;
-}
-
-/* Notification */
-.notification {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #8158fc;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  display: none;
-}
-
-/* Dark Mode */
-body.dark {
-  background: #121212;
+body.dark .referral input[readonly] {
+  background: #2c2c2c;
   color: white;
 }
 
-body.dark .profile-card,
-body.dark .card,
-body.dark table,
-body.dark .create-ad,
-body.dark .referral,
-body.dark .analytics {
-  background: #1e1e1e;
-  color: white;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .sidebar {
-    display: none;
-  }
-
-  .dashboard {
-    flex-direction: column;
-  }
-
-  .main-content {
-    padding: 20px;
-  }
-}
-
-/* MODALS */
+/* ===================== MODALS ===================== */
 .modal {
   display: none;
   position: fixed;
@@ -288,7 +281,6 @@ body.dark .analytics {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  transition: all 0.3s ease;
 }
 
 .modal-content {
@@ -296,8 +288,8 @@ body.dark .analytics {
   padding: 25px;
   border-radius: 12px;
   width: 320px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease;
 }
 
@@ -318,11 +310,6 @@ body.dark .analytics {
   transition: 0.3s;
 }
 
-.modal-content button:hover {
-  opacity: 0.9;
-}
-
-/* Buttons specific */
 #confirmDeposit,
 #confirmWithdraw {
   background: #8158fc;
@@ -334,12 +321,7 @@ body.dark .analytics {
   background: #6d46e8;
 }
 
-/* EDIT PROFILE MODAL */
-#editProfileModal input {
-  margin-bottom: 10px;
-}
-
-/* NOTIFICATION */
+/* ===================== NOTIFICATION ===================== */
 .notification {
   position: fixed;
   top: 20px;
@@ -353,7 +335,38 @@ body.dark .analytics {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* ANIMATIONS */
+/* ===================== DARK MODE ===================== */
+body.dark {
+  background: #121212;
+  color: white;
+}
+
+body.dark .profile-card,
+body.dark .card,
+body.dark table,
+body.dark .create-ad,
+body.dark .referral,
+body.dark .analytics {
+  background: #1e1e1e;
+  color: white;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+}
+
+/* ===================== ANIMATIONS ===================== */
 @keyframes fadeIn {
   0% {
     transform: translateY(-20px);
@@ -365,7 +378,7 @@ body.dark .analytics {
   }
 }
 
-/* HOVER EFFECTS FOR CARDS */
+/* ===================== HOVER EFFECTS ===================== */
 .profile-card:hover,
 .card:hover,
 .create-ad:hover,
@@ -373,14 +386,13 @@ body.dark .analytics {
 .analytics:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
 }
 
 .profile-card img:hover {
   transform: scale(1.1);
-  transition: transform 0.3s ease;
 }
 
+/* Smooth transitions for dark mode and card hover */
 body,
 .main-content,
 .card,
@@ -393,5 +405,3 @@ table,
     background 0.3s ease,
     color 0.3s ease;
 }
-
-

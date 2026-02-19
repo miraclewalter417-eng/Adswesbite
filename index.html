@@ -3,31 +3,47 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mimi market</title>
-    <link rel="shortcut icon" href="images/favicon icon.jpeg" type="image/x-icon">
+    <title>Mimi Market</title>
+    <link
+      rel="shortcut icon"
+      href="images/favicon icon.jpeg"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
+
   <body>
     <nav class="navbar">
       <div class="logo">Mimiads<span>market</span></div>
+
       <div class="nav-actions">
         <button id="openModal" class="btn-primary">Post Ad</button>
       </div>
+
       <div class="user_icon">
-        <a href="register.html"><i class="fa-solid fa-user-check"></i></a>
+        <a href="register.html">
+          <i class="fa-solid fa-user-check"></i>
+        </a>
       </div>
     </nav>
 
     <header class="hero">
-      <h1>What are you<span> looking for?</span></h1>
+      <h1>What are you <span>looking for?</span></h1>
+
       <div class="search-container">
         <input
           type="text"
           id="searchInput"
           placeholder="Search for electronics, jobs, etc..."
         />
-        <button onclick="searchAds()">Search</button>
+        <button type="button" onclick="searchAds()">Search</button>
       </div>
     </header>
 
@@ -44,84 +60,86 @@
 
       <section class="feed">
         <h2 id="feedTitle" class="feed_head">Featured Ads</h2>
-       
         <div class="ads-grid" id="adsGrid"></div>
-        
       </section>
     </div>
 
+    <!-- Modal -->
     <div id="adModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2 class="modal_head">Post a New Ad</h2>
+
         <form id="adForm">
           <input type="text" id="adTitle" placeholder="Ad Title" required />
           <input type="number" id="adPrice" placeholder="Price (₦)" required />
+
           <select id="adCategory">
             <option value="Electronics">Electronics</option>
             <option value="Services">Services</option>
             <option value="Real Estate">Real Estate</option>
           </select>
-          
-          <textarea id="adDesc" placeholder="Description" rows="4"></textarea>
-          <button type="submit" class="btn-primary">Publish Now</button>
-          <!-- <label for="adImage">Upload Item Photo:</label> -->
+
+          <textarea
+            id="adDesc"
+            placeholder="Description"
+            rows="4"
+            required
+          ></textarea>
+
           <input type="file" id="adImage" accept="image/*" />
+
+          <button type="submit" class="btn-primary">Publish Now</button>
         </form>
       </div>
     </div>
 
+    <!-- Footer -->
     <footer class="footer">
-  <div class="footer-container">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h2 class="logo">AdPromoter</h2>
+          <p>
+            We help brands grow with high-converting digital advertising
+            solutions. Reach your audience. Increase revenue. Scale faster.
+          </p>
+        </div>
 
-    <!-- Brand Section -->
-    <div class="footer-section">
-      <h2 class="logo">AdPromoter</h2>
-      <p>We help brands grow with high-converting digital advertising solutions. Reach your audience. Increase revenue. Scale faster.</p>
-    </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Advertise</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
 
-    <!-- Quick Links -->
-    <div class="footer-section">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Advertise</a></li>
-        <li><a href="#">Pricing</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
+        <div class="footer-section">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="#">Banner Ads</a></li>
+            <li><a href="#">Sponsored Posts</a></li>
+            <li><a href="#">Landing Page Ads</a></li>
+            <li><a href="#">Social Media Ads</a></li>
+          </ul>
+        </div>
 
-    <!-- Services -->
-    <div class="footer-section">
-      <h3>Services</h3>
-      <ul>
-        <li><a href="#">Banner Ads</a></li>
-        <li><a href="#">Sponsored Posts</a></li>
-        <li><a href="#">Landing Page Ads</a></li>
-        <li><a href="#">Social Media Ads</a></li>
-      </ul>
-    </div>
+        <div class="footer-section">
+          <h3>Subscribe</h3>
+          <form id="newsletterForm">
+            <input type="email" placeholder="Enter your email" required />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
 
-    <!-- Newsletter -->
-    <div class="footer-section">
-      <h3>Subscribe</h3>
-      <form id="newsletterForm">
-        <input type="email" placeholder="Enter your email" required>
-        <button type="submit">Subscribe</button>
-      </form>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <p>© 2026 AdPromoter. All Rights Reserved.</p>
-    <button id="backToTop">↑</button>
-  </div>
-</footer>
-
-    
+      <div class="footer-bottom">
+        <p>© 2026 AdPromoter. All Rights Reserved.</p>
+        <button id="backToTop">↑</button>
+      </div>
+    </footer>
 
     <script src="script.js"></script>
-    <!-- <script src="server.js"></script>   -->
   </body>
 </html>

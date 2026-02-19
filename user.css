@@ -51,6 +51,22 @@ body.dark .sidebar {
   border-radius: 8px;
 }
 
+.logout_btn{
+  background:#6d46e8 ;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 12px;
+  width: 100%;
+
+  border: none;
+  border-radius: 8px;
+  color: white;
+}
+
+.logout_btn:hover{
+  
+}
+
 .sidebar ul li a:hover,
 .sidebar ul li.active a {
   background: rgba(255, 255, 255, 0.2);

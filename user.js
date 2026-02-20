@@ -26,6 +26,17 @@ const withdrawBtn = document.querySelector(
   "button[onclick=\"openModal('withdrawModal')\"]",
 );
 
+function displayUserInfo() {
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const userDisplayName = document.querySelector(".profile-info h3");
+  const userDisplayEmail = document.querySelector(".profile-info p");
+  userDisplayName.textContent = user.name;
+  userDisplayEmail.textContent = "Email:" + user.email;
+
+  console.log({ userDisplayName });
+}
+
+displayUserInfo();
 // ----------------------------
 // NOTIFICATION FUNCTION
 // ----------------------------

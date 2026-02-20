@@ -11,8 +11,8 @@ function toggleForm() {
   nameField.style.display = isLogin ? "none" : "block";
   formTitle.textContent = isLogin ? "Login" : "Register";
   submitBtn.textContent = isLogin ? "Login" : "Register";
-  toggleText.textContent = isLogin 
-    ? "Don't have an account? Register" 
+  toggleText.textContent = isLogin
+    ? "Don't have an account? Register"
     : "Already have an account? Login";
   message.textContent = "";
 }
@@ -33,8 +33,19 @@ submitBtn.addEventListener("click", () => {
   }
 
   if (isLogin) {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user && user.email === email && user.password === password) {
+    const users = JSON.parse(localStorage.getItem("users"));
+    if (!users) {
+      return (message.textContent = "Invalid email or password.");
+    }
+    const userByEmail = users.find((user) => user.email === email);
+    if (!userByEmail) {
+      return (message.textContent = "Invalid email or password.");
+    }
+    console.log({ userByEmail });
+
+    if (userByEmail && userByEmail.password === password) {
+      localStorage.setItem("currentUser", JSON.stringify(userByEmail));
+      // const currentUser =
       message.style.color = "green";
       message.textContent = "Login successful!";
       setTimeout(() => {
@@ -45,7 +56,12 @@ submitBtn.addEventListener("click", () => {
     }
   } else {
     const newUser = { name, email, password, balance: 0 };
-    localStorage.setItem("user", JSON.stringify(newUser));
+    const users = JSON.parse(localStorage.getItem("users")) ?? [];
+
+    const latestUsers = [...users, newUser];
+    console.log({ latestUsers });
+
+    localStorage.setItem("users", JSON.stringify(latestUsers));
     message.style.color = "green";
     message.textContent = "Registration successful!";
     setTimeout(() => {

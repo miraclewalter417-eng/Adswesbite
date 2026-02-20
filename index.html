@@ -13,7 +13,6 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
@@ -23,14 +22,36 @@
     <nav class="navbar">
       <div class="logo">Mimiads<span>market</span></div>
 
-      <div class="nav-actions">
-        <button id="openModal" class="btn-primary">Post Ad</button>
-      </div>
+      <!-- Toggle Button -->
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-      <div class="user_icon">
-        <a href="register.html">
-          <i class="fa-solid fa-user-check"></i>
-        </a>
+      <!-- Nav Menu -->
+      <div class="nav-menu" id="navMenu">
+        <div class="user_icon">
+          <a href="#"><i class="fa-solid fa-bookmark"></i></a>
+        </div>
+
+        <div class="user_icon">
+          <a href="#"><i class="fa-solid fa-message"></i></a>
+        </div>
+
+        <div class="user_icon">
+          <a href="#"><i class="fa-solid fa-bell"></i></a>
+        </div>
+
+        <div class="user_icon">
+          <a href="#"><i class="fa-solid fa-clipboard-list"></i></a>
+        </div>
+
+        <div class="user_icon">
+          <a href="register.html"><i class="fa-solid fa-user-check"></i></a>
+        </div>
+
+        <div class="nav-actions">
+          <button id="openModal" class="btn-primary">Sell</button>
+        </div>
       </div>
     </nav>
 
@@ -141,5 +162,15 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <!-- Toggle Script -->
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const navMenu = document.getElementById("navMenu");
+
+      menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+    </script>
   </body>
 </html>

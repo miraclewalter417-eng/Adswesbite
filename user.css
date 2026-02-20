@@ -6,41 +6,64 @@
   font-family: Arial, sans-serif;
 }
 
+:root {
+  --primary: #2563eb;
+  --accent: #f59e0b;
+  --dark: #1e293b;
+  --light: #f8fafc;
+  --bg-color: #080808;
+  --second-bg-color: #131313;
+  --text-color: #121212;
+  --main-color: #00ffee;
+}
+
 body {
   background: #f4f6fb;
-  color: #121212;
-  transition:
-    background 0.3s ease,
-    color 0.3s ease;
+  color: var(--text-color);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* ===================== DASHBOARD LAYOUT ===================== */
 .dashboard {
   display: flex;
-  min-height: 100vh;
+  /* overflow-x: hidden; */
 }
 
 /* ===================== SIDEBAR ===================== */
 .sidebar {
-  width: 240px;
+  position: sticky;
+  width: 20%;
+  height: 100vh;
   background: #8158fc;
   color: white;
   padding: 30px 20px;
-  transition: background 0.3s ease;
+  transition: 0.3s ease;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
 }
 
 body.dark .sidebar {
   background: #6d46e8;
 }
 
-.sidebar ul {
-  list-style: none;
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--dark);
 }
 
-.sidebar ul li {
-  margin-bottom: 10px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+.logo span {
+  color: #00ff00;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .sidebar ul li a {
@@ -49,27 +72,45 @@ body.dark .sidebar {
   display: block;
   padding: 12px;
   border-radius: 8px;
-}
-
-.logout_btn{
-  background:#6d46e8 ;
-  cursor: pointer;
-  text-decoration: none;
-  padding: 12px;
-  width: 100%;
-
-  border: none;
-  border-radius: 8px;
-  color: white;
-}
-
-.logout_btn:hover{
-  
+  transition: 0.3s;
 }
 
 .sidebar ul li a:hover,
 .sidebar ul li.active a {
   background: rgba(255, 255, 255, 0.2);
+}
+
+.logout_btn {
+  margin-top: 12rem;
+  background: #6d46e8;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.logout_btn:hover {
+  background: red;
+}
+
+/* Hamburger menu for mobile */
+.menu-icon {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.menu-icon span {
+  width: 28px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+  transition: 0.3s;
 }
 
 /* ===================== MAIN CONTENT ===================== */
@@ -79,10 +120,11 @@ body.dark .sidebar {
 }
 
 /* ===================== HEADER ===================== */
-header {
+header.top-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .edit-btn {
@@ -117,13 +159,8 @@ header {
   margin-top: 20px;
   border-radius: 12px;
   gap: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
   transition: all 0.3s ease;
-}
-
-.profile-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .profile-card img {
@@ -148,7 +185,8 @@ header {
   color: white;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(129, 88, 252, 0.3);
+  box-shadow: 0 5px 20px rgba(129,88,252,0.3);
+  text-align: center;
 }
 
 .balance-card h2 {
@@ -166,22 +204,8 @@ header {
   transition: 0.3s;
 }
 
-#depositBtn {
-  background: white;
-  color: #8158fc;
-}
-
-#depositBtn:hover {
-  background: #f2f2f2;
-}
-
-#withdrawBtn {
-  background: #4c1d95;
-  color: white;
-}
-
-#withdrawBtn:hover {
-  background: #3b1573;
+.balance-card button:hover {
+  opacity: 0.9;
 }
 
 /* ===================== ADS OVERVIEW ===================== */
@@ -197,31 +221,31 @@ header {
   padding: 20px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
   transition: all 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
+
 
 /* ===================== TRANSACTIONS ===================== */
 .transactions {
   margin-top: 40px;
+  overflow-x: auto;
 }
 
 table {
   width: 100%;
-  background: white;
+  border-collapse: collapse;
   border-radius: 12px;
   overflow: hidden;
-  border-collapse: collapse;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-th,
-td {
+th, td {
   padding: 14px;
   text-align: left;
 }
@@ -251,16 +275,15 @@ tr:nth-child(even) {
   background: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
   transition: all 0.3s ease;
 }
 
 .create-ad input,
 .referral input {
-  display: block;
-  margin-bottom: 10px;
-  padding: 10px;
   width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
 }
@@ -293,7 +316,7 @@ body.dark .referral input[readonly] {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.5);
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -303,9 +326,10 @@ body.dark .referral input[readonly] {
   background: white;
   padding: 25px;
   border-radius: 12px;
-  width: 320px;
+  width: 90%;
+  max-width: 400px;
   text-align: center;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   animation: fadeIn 0.3s ease;
 }
 
@@ -323,7 +347,6 @@ body.dark .referral input[readonly] {
   border: none;
   cursor: pointer;
   margin: 5px;
-  transition: 0.3s;
 }
 
 #confirmDeposit,
@@ -348,7 +371,7 @@ body.dark .referral input[readonly] {
   border-radius: 8px;
   display: none;
   z-index: 2000;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 /* ===================== DARK MODE ===================== */
@@ -362,62 +385,63 @@ body.dark .card,
 body.dark table,
 body.dark .create-ad,
 body.dark .referral,
-body.dark .analytics {
+body.dark .analytics,
+body.dark .modal-content {
   background: #1e1e1e;
   color: white;
 }
 
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 900px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
   .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 20px;
     display: none;
   }
 
-  .dashboard {
-    flex-direction: column;
+  .menu-icon {
+    display: flex;
+  }
+
+  #menu-toggle:checked ~ .sidebar {
+    display: block;
   }
 
   .main-content {
     padding: 20px;
   }
+
+  .ads-overview,
+  .transactions table,
+  .create-ad,
+  .referral,
+  .analytics {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .balance-card {
+    text-align: center;
+  }
+
+  .profile-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-card img {
+    margin-bottom: 10px;
+  }
 }
 
 /* ===================== ANIMATIONS ===================== */
 @keyframes fadeIn {
-  0% {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* ===================== HOVER EFFECTS ===================== */
-.profile-card:hover,
-.card:hover,
-.create-ad:hover,
-.referral:hover,
-.analytics:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.profile-card img:hover {
-  transform: scale(1.1);
-}
-
-/* Smooth transitions for dark mode and card hover */
-body,
-.main-content,
-.card,
-.profile-card,
-table,
-.create-ad,
-.referral,
-.analytics {
-  transition:
-    background 0.3s ease,
-    color 0.3s ease;
+  0% { transform: translateY(-20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }

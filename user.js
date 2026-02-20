@@ -8,8 +8,6 @@ let referralEarnings = 5000;
 // DOM ELEMENTS
 // ----------------------------
 const balanceDisplay = document.querySelector(".balance-card h2");
-const depositBtn = document.getElementById("depositBtn");
-const withdrawBtn = document.getElementById("withdrawBtn");
 const depositModal = document.getElementById("depositModal");
 const withdrawModal = document.getElementById("withdrawModal");
 const editProfileModal = document.getElementById("editProfileModal");
@@ -20,6 +18,13 @@ const themeToggle = document.getElementById("themeToggle");
 const editBtn = document.querySelector(".edit-btn");
 const createAdBtn = document.getElementById("createAdBtn");
 const refEarningsDisplay = document.getElementById("refEarnings");
+const adList = document.getElementById("adList");
+const depositBtn = document.querySelector(
+  "button[onclick=\"openModal('depositModal')\"]",
+);
+const withdrawBtn = document.querySelector(
+  "button[onclick=\"openModal('withdrawModal')\"]",
+);
 
 // ----------------------------
 // NOTIFICATION FUNCTION
@@ -42,16 +47,32 @@ if (themeToggle) {
 }
 
 // ----------------------------
+// MODAL FUNCTIONS
+// ----------------------------
+function openModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) modal.style.display = "flex";
+}
+
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) modal.style.display = "none";
+}
+
+// Close modals when clicking outside
+[depositModal, withdrawModal, editProfileModal].forEach((modal) => {
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+  }
+});
+
+// ----------------------------
 // DEPOSIT MODAL
 // ----------------------------
 if (depositBtn && depositModal && confirmDeposit) {
-  depositBtn.addEventListener("click", () => {
-    depositModal.style.display = "flex";
-  });
-
-  function closeDepositModal() {
-    depositModal.style.display = "none";
-  }
+  depositBtn.addEventListener("click", () => openModal("depositModal"));
 
   confirmDeposit.addEventListener("click", () => {
     const amount = Number(document.getElementById("depositAmount").value);
@@ -59,14 +80,11 @@ if (depositBtn && depositModal && confirmDeposit) {
       balance += amount;
       balanceDisplay.textContent = "₦" + balance.toLocaleString();
       showNotification("Deposit Successful!");
-      closeDepositModal();
+      closeModal("depositModal");
+      document.getElementById("depositAmount").value = "";
     } else {
       showNotification("Enter a valid amount", "error");
     }
-  });
-
-  depositModal.addEventListener("click", (e) => {
-    if (e.target === depositModal) closeDepositModal();
   });
 }
 
@@ -74,13 +92,7 @@ if (depositBtn && depositModal && confirmDeposit) {
 // WITHDRAW MODAL
 // ----------------------------
 if (withdrawBtn && withdrawModal && confirmWithdraw) {
-  withdrawBtn.addEventListener("click", () => {
-    withdrawModal.style.display = "flex";
-  });
-
-  function closeWithdrawModal() {
-    withdrawModal.style.display = "none";
-  }
+  withdrawBtn.addEventListener("click", () => openModal("withdrawModal"));
 
   confirmWithdraw.addEventListener("click", () => {
     const amount = Number(document.getElementById("withdrawAmount").value);
@@ -88,14 +100,11 @@ if (withdrawBtn && withdrawModal && confirmWithdraw) {
       balance -= amount;
       balanceDisplay.textContent = "₦" + balance.toLocaleString();
       showNotification("Withdrawal Request Sent (Admin Approval Needed)");
-      closeWithdrawModal();
+      closeModal("withdrawModal");
+      document.getElementById("withdrawAmount").value = "";
     } else {
       showNotification("Insufficient Balance or Invalid Amount", "error");
     }
-  });
-
-  withdrawModal.addEventListener("click", (e) => {
-    if (e.target === withdrawModal) closeWithdrawModal();
   });
 }
 
@@ -103,19 +112,15 @@ if (withdrawBtn && withdrawModal && confirmWithdraw) {
 // EDIT PROFILE MODAL
 // ----------------------------
 if (editBtn && editProfileModal) {
-  editBtn.addEventListener("click", () => {
-    editProfileModal.style.display = "flex";
-  });
+  editBtn.addEventListener("click", () => openModal("editProfileModal"));
 
   const saveProfileBtn = editProfileModal.querySelector("button");
-  saveProfileBtn.addEventListener("click", () => {
-    showNotification("Profile updated!");
-    editProfileModal.style.display = "none";
-  });
-
-  editProfileModal.addEventListener("click", (e) => {
-    if (e.target === editProfileModal) editProfileModal.style.display = "none";
-  });
+  if (saveProfileBtn) {
+    saveProfileBtn.addEventListener("click", () => {
+      showNotification("Profile updated!");
+      closeModal("editProfileModal");
+    });
+  }
 }
 
 // ----------------------------
@@ -139,7 +144,6 @@ if (createAdBtn) {
     balance -= budget;
     balanceDisplay.textContent = "₦" + balance.toLocaleString();
 
-    const adList = document.getElementById("adList");
     const adItem = document.createElement("p");
     adItem.textContent = `${title} - ₦${budget.toLocaleString()} (Running)`;
     adList.appendChild(adItem);
@@ -214,15 +218,13 @@ function updateChartColors() {
 }
 
 // ----------------------------
-// OPTIONAL: LOGOUT (if sidebar exists)
+// SIDEBAR MOBILE TOGGLE
 // ----------------------------
-const logoutLink = document.querySelector(".logout-btn");
-if (logoutLink) {
-  logoutLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    showNotification("Logging out...");
-    setTimeout(() => {
-      window.location.href = "register.html";
-    }, 1000);
+const menuToggle = document.getElementById("menu-toggle");
+const sidebar = document.querySelector(".sidebar");
+
+if (menuToggle && sidebar) {
+  menuToggle.addEventListener("change", () => {
+    sidebar.style.display = menuToggle.checked ? "block" : "none";
   });
 }

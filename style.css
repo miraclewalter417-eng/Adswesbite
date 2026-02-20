@@ -27,7 +27,7 @@ body {
   border-bottom: 1px solid #e2e8f0;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 999;
 }
 
 .logo {
@@ -52,9 +52,8 @@ body {
 
 .user_icon {
   cursor: pointer;
-  margin-left: 1%;
   border-radius: 10px;
-  background-color: var(--accent);
+  background-color: #8158fc;
   padding: 5px;
   font-size: 25px;
   transition: 0.3s ease;
@@ -63,6 +62,24 @@ body {
 .user_icon:hover {
   color: var(--accent);
   background-color: wheat;
+}
+
+/* Toggle Button - Professional Responsive */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+/* Nav Menu Wrapper */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: max-height 0.4s ease, padding 0.4s ease;
 }
 
 /* Hero */
@@ -343,7 +360,7 @@ body {
 }
 
 /* Responsive */
-@media (max-width: 425px) {
+@media (max-width: 768px) {
   .main-layout {
     flex-direction: column;
   }
@@ -371,12 +388,51 @@ body {
     padding: 10px 20px;
   }
 
-  .modal_head{
-    width: 100%;
-    margin-left: 7px;
+  .menu-toggle {
+    display: block;
   }
-  .modal-content{
-    width: 80%;
-    /* height: 100%; */
+
+  .nav-menu {
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    width: 100%;
+    gap: 10px;
+    padding: 0;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .nav-menu.active {
+    max-height: 500px;
+    padding: 15px 0;
+  }
+
+  .menu-toggle.active i {
+    transform: rotate(90deg);
+  }
+
+  .search-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-container input {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .search-container button {
+    width: 100%;
+    border-radius: 5px;
+  }
+
+  .modal_head {
+    margin-left: 0;
+  }
+
+  .modal-content {
+    width: 90%;
   }
 }

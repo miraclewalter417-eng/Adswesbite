@@ -2,6 +2,7 @@
 // INITIAL DATA (LocalStorage)
 // ===============================
 let ads = JSON.parse(localStorage.getItem("myAds")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const adsGrid = document.getElementById("adsGrid");
 const adForm = document.getElementById("adForm");
@@ -72,16 +73,39 @@ function cardItem(ad) {
   price.textContent = "₦" + Number(ad.price).toLocaleString("en-NG");
   adInfo.appendChild(price);
 
-  const removeBtn = document.createElement("button");
-  removeBtn.classList.add("ad-removeBtn");
-  removeBtn.innerText = "Remove Item";
-  removeBtn.addEventListener("click", () => removeAdItem(ad.id));
+  // ===========================
+  // Add to Cart Button
+  // ===========================
+  const cartBtn = document.createElement("button");
+  cartBtn.classList.add("ad-removeBtn"); // reuse styling
+  cartBtn.innerText = "Add to Cart";
+  cartBtn.addEventListener("click", () => addToCart(ad));
+  adInfo.appendChild(cartBtn);
+
+  // ===========================
+  // Remove Item Button (for user ads only)
+  // ===========================
+  if (ad.source === "user") {
+    const removeBtn = document.createElement("button");
+    removeBtn.classList.add("ad-removeBtn");
+    removeBtn.innerText = "Remove Item";
+    removeBtn.addEventListener("click", () => removeAdItem(ad.id));
+    adInfo.appendChild(removeBtn);
+  }
 
   adItem.appendChild(adImage);
   adItem.appendChild(adInfo);
-  adItem.appendChild(removeBtn);
 
   return adItem;
+}
+
+// ===============================
+// ADD TO CART
+// ===============================
+function addToCart(ad) {
+  cart.push(ad);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert(`${ad.title} added to cart!`);
 }
 
 // ===============================
@@ -132,7 +156,7 @@ function saveAd(imageData) {
 }
 
 // ===============================
-// SEARCH FUNCTION (Works for API + Local)
+// SEARCH FUNCTION (Local + API)
 // ===============================
 searchInput.addEventListener("input", searchAds);
 
@@ -165,27 +189,23 @@ function filterCategory(cat) {
 // API INTEGRATION (FakeStore API)
 // ===============================
 async function loadAPIProducts() {
-  // Only load API products if localStorage is empty
-  if (ads.length > 0) {
-    renderAds(ads);
-    return;
-  }
-
   try {
     const response = await fetch("https://fakestoreapi.com/products");
     const products = await response.json();
 
     const apiAds = products.map((item) => ({
-      id: item.id + 10000,
+      id: item.id + 100000,
       title: item.title,
-      price: item.price * 1000,
-      category: "Electronics",
+      price: item.price * 1000, // convert to ₦
+      category: item.category,
       desc: item.description,
       image: item.image,
       source: "api",
     }));
 
-    ads = apiAds;
+    // Merge API products with localStorage ads
+    const allAds = [...ads.filter((a) => a.source === "user"), ...apiAds];
+    ads = allAds;
     localStorage.setItem("myAds", JSON.stringify(ads));
     renderAds(ads);
   } catch (error) {
@@ -218,6 +238,16 @@ backToTop.addEventListener("click", () => {
     top: 0,
     behavior: "smooth",
   });
+});
+
+// ===============================
+// NAV TOGGLE (Mobile)
+// ===============================
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("active");
 });
 
 // ===============================

@@ -3,242 +3,326 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | eTrend Gigs</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Authentication | MaxSale</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
+        :root {
+            --primary: #DC2626;
+            --primary-dark: #B91C1C;
+            --surface: #ffffff;
+            --bg: #F9FAFB;
+            --text-main: #111827;
+            --text-muted: #4B5563;
+            --border: #E5E7EB;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background: linear-gradient(180deg, #022c22 50%, #d1fae5 50%);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(220, 38, 38, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(220, 38, 38, 0.05) 0%, transparent 40%);
         }
 
-        .auth-card {
-            background: #f4f4f4;
+        .auth-container {
             width: 100%;
-            max-width: 450px;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            max-width: 440px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .brand-logo {
             text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 2rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .brand-logo i { color: var(--primary); }
+
+        .auth-card {
+            background: var(--surface);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
         }
 
         .auth-card h2 {
-            margin-bottom: 30px;
-            font-size: 2rem;
-            color: #000;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.75rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            text-align: center;
         }
 
-        .toggle-container {
+        .auth-card p {
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+        }
+
+        .tabs {
             display: flex;
-            background: #e0e0e0;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            overflow: hidden;
-            border: 1px solid #ccc;
+            background: #F3F4F6;
+            padding: 6px;
+            border-radius: 14px;
+            margin-bottom: 32px;
         }
 
-        .toggle-btn {
+        .tab {
             flex: 1;
-            padding: 12px;
-            cursor: pointer;
+            padding: 10px;
+            text-align: center;
             font-weight: 600;
-            transition: var(--transition);
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
-        .toggle-btn.active {
-            background: #10b981;
-            color: white;
+        .tab.active {
+            background: white;
+            color: var(--text-main);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
+        .form-group { margin-bottom: 20px; }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 16px;
+            color: #9CA3AF;
         }
 
         .form-group input {
             width: 100%;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            background: #f0f0f0;
-            font-size: 1rem;
+            padding: 14px 16px 14px 48px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
             outline: none;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
         }
 
         .form-group input:focus {
-            border-color: #10b981;
-        }
-
-        .forgot-pass {
-            display: block;
-            text-align: left;
-            margin-top: -10px;
-            margin-bottom: 25px;
-            color: #10b981;
-            font-size: 0.9rem;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.08);
         }
 
         .btn-auth {
             width: 100%;
-            background: #10b981;
+            background: var(--primary);
             color: white;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 20px;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-top: 10px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .btn-auth:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.25);
         }
 
         .auth-footer {
-            font-size: 0.95rem;
+            margin-top: 24px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
 
         .auth-footer a {
-            color: #10b981;
-            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
         }
 
-        /* Hide Signup by default */
-        #signup-form {
-            display: none;
-        }
+        #signup-form { display: none; }
     </style>
 </head>
 <body>
 
-    <div class="auth-card">
-        <h2 id="auth-title">Login</h2>
-        
-        <div class="toggle-container">
-            <div class="toggle-btn active" onclick="showLogin()">Login</div>
-            <div class="toggle-btn" onclick="showSignup()">Signup</div>
+    <div class="auth-container">
+        <div class="brand-logo">
+            <i class="fas fa-shopping-bag"></i>
+            <span>MaxSale</span>
         </div>
 
-        <!-- Login Form -->
-        <form id="login-form">
-            <div class="form-group">
-                <input type="text" placeholder="Username" required>
+        <div class="auth-card">
+            <h2 id="title">Welcome Back</h2>
+            <p id="subtitle">Log in to manage your marketplace</p>
+            
+            <div class="tabs">
+                <div class="tab active" onclick="setTab('login')">Login</div>
+                <div class="tab" onclick="setTab('signup')">Sign Up</div>
             </div>
-            <div class="form-group">
-                <input type="password" placeholder="Password" required>
-            </div>
-            <a href="#" class="forgot-pass">Forgot password?</a>
-            <button type="submit" class="btn btn-auth">Login</button>
-        </form>
 
-        <!-- Signup Form -->
-        <form id="signup-form">
-            <div class="form-group">
-                <input type="text" placeholder="Username" required>
-            </div>
-            <div class="form-group">
-                <input type="email" placeholder="Email Address" required>
-            </div>
-            <div class="form-group">
-                <input type="password" placeholder="Password" required>
-            </div>
-            <div class="form-group">
-                <input type="password" placeholder="Confirm Password" required>
-            </div>
-            <button type="submit" class="btn btn-auth">Signup</button>
-        </form>
+            <!-- Login Form -->
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="login-user" placeholder="Enter username" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="login-pass" placeholder="••••••••" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-auth">Sign In</button>
+            </form>
 
-        <div class="auth-footer">
-            <span id="footer-text">Not a member?</span> <a href="javascript:void(0)" onclick="toggleAuth()">Signup now</a>
+            <!-- Signup Form -->
+            <form id="signup-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" placeholder="John Doe" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="john@example.com" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-auth">Create Account</button>
+            </form>
+
+            <div class="auth-footer">
+                <span id="footer-msg">Don't have an account?</span> 
+                <a href="javascript:void(0)" id="footer-link" onclick="toggleMode()">Sign up free</a>
+            </div>
         </div>
     </div>
 
     <script>
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
-        const authTitle = document.getElementById('auth-title');
-        const footerText = document.getElementById('footer-text');
-        const toggleBtns = document.querySelectorAll('.toggle-btn');
-
-        // Initialize Local Storage
+        // Init demo data
         if (!localStorage.getItem('users')) {
             localStorage.setItem('users', JSON.stringify([
-                { username: 'admin', email: 'admin@etrendgigs.com', password: 'password123', role: 'admin' }
+                { username: 'miracle', password: 'password123', role: 'admin' },
+                { username: 'user', password: 'password', role: 'user' }
             ]));
         }
 
-        function showLogin() {
-            loginForm.style.display = 'block';
-            signupForm.style.display = 'none';
-            authTitle.innerText = 'Login';
-            footerText.innerText = 'Not a member?';
-            toggleBtns[0].classList.add('active');
-            toggleBtns[1].classList.remove('active');
-        }
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const title = document.getElementById('title');
+        const subtitle = document.getElementById('subtitle');
+        const footerMsg = document.getElementById('footer-msg');
+        const footerLink = document.getElementById('footer-link');
+        const tabs = document.querySelectorAll('.tab');
 
-        function showSignup() {
-            loginForm.style.display = 'none';
-            signupForm.style.display = 'block';
-            authTitle.innerText = 'Signup';
-            footerText.innerText = 'Already a member?';
-            toggleBtns[0].classList.remove('active');
-            toggleBtns[1].classList.add('active');
-        }
-
-        function toggleAuth() {
-            if (loginForm.style.display === 'none') {
-                showLogin();
+        function setTab(mode) {
+            if (mode === 'login') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+                title.innerText = 'Welcome Back';
+                subtitle.innerText = 'Log in to manage your marketplace';
+                footerMsg.innerText = "Don't have an account?";
+                footerLink.innerText = "Sign up free";
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
             } else {
-                showSignup();
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+                title.innerText = 'Join MaxSale';
+                subtitle.innerText = 'Create an account to start trading';
+                footerMsg.innerText = "Already have an account?";
+                footerLink.innerText = "Log in here";
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
             }
         }
 
-        // Signup Logic
-        signupForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = signupForm.querySelectorAll('input')[0].value;
-            const email = signupForm.querySelectorAll('input')[1].value;
-            const password = signupForm.querySelectorAll('input')[2].value;
-            const confirmPass = signupForm.querySelectorAll('input')[3].value;
+        function toggleMode() {
+            if (loginForm.style.display === 'none') setTab('login');
+            else setTab('signup');
+        }
 
-            if (password !== confirmPass) {
-                alert('Passwords do not match!');
-                return;
-            }
-
-            const users = JSON.parse(localStorage.getItem('users'));
-            if (users.find(u => u.username === username)) {
-                alert('Username already exists!');
-                return;
-            }
-
-            users.push({ username, email, password, role: 'user' });
-            localStorage.setItem('users', JSON.stringify(users));
-            alert('Signup successful! Please login.');
-            showLogin();
-        });
-
-        // Login Logic
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const username = loginForm.querySelectorAll('input')[0].value;
-            const password = loginForm.querySelectorAll('input')[1].value;
-
+            const user = document.getElementById('login-user').value;
+            const pass = document.getElementById('login-pass').value;
+            
             const users = JSON.parse(localStorage.getItem('users'));
-            const user = users.find(u => u.username === username && u.password === password);
+            const matched = users.find(u => u.username === user && u.password === pass);
 
-            if (user) {
-                localStorage.setItem('currentUser', JSON.stringify(user));
+            if (matched) {
+                localStorage.setItem('currentUser', JSON.stringify(matched));
                 localStorage.setItem('isLoggedIn', 'true');
                 
-                if (user.role === 'admin') {
-                    window.location.href = 'admin.html';
-                } else {
-                    window.location.href = 'index.html';
-                }
+                const btn = loginForm.querySelector('button');
+                btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Authenticating...';
+                
+                setTimeout(() => {
+                    if (matched.role === 'admin') window.location.href = 'admin.html';
+                    else window.location.href = 'index.html';
+                }, 1000);
             } else {
-                alert('Invalid username or password!');
+                alert('Invalid credentials. Hint: use miracle / password123');
             }
+        });
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Demo version: Account creation is currently restricted.');
         });
     </script>
 </body>

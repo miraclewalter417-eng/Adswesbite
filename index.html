@@ -30,6 +30,16 @@
                 </ul>
             </nav>
             <div class="header-cta">
+                <div class="header-icons" style="display: flex; gap: 20px; align-items: center; margin-right: 15px;">
+                    <a href="#" class="header-icon" style="position: relative; color: var(--text-main); font-size: 1.2rem;">
+                        <i class="far fa-heart"></i>
+                        <span class="badge-dot" style="position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: var(--primary); border-radius: 50%; border: 2px solid white;"></span>
+                    </a>
+                    <a href="#" class="header-icon" style="position: relative; color: var(--text-main); font-size: 1.2rem;">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="badge-count" style="position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; font-size: 0.65rem; padding: 2px 5px; border-radius: 10px; font-weight: 700; min-width: 18px; text-align: center;">0</span>
+                    </a>
+                </div>
                 <a href="auth.html" class="btn btn-get-started">Get started</a>
                 <button class="menu-toggle"><i class="fas fa-bars"></i></button>
             </div>
@@ -46,8 +56,8 @@
                 <h1>The #1 Marketplace to Buy, Sell & Swap Gadgets <span class="accent-text">🇳🇬</span></h1>
                 <p>Welcome to MaxSale. Find the latest smartphones, laptops, and gaming consoles at unbeatable prices. Join our community for seamless transactions and amazing deals in Naira.</p>
                 <div class="hero-btns">
-                    <button class="btn btn-primary">Start Swapping</button>
-                    <button class="btn btn-outline">Browse Market</button>
+                    <button class="btn btn-primary" id="hero-swap-btn">Start Swapping</button>
+                    <button class="btn btn-outline" id="hero-browse-btn">Browse Market</button>
                 </div>
             </div>
             <div class="hero-image animate-fade-up" style="animation-delay: 0.2s;">
@@ -90,6 +100,17 @@
 
                 <div id="search-count" style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted); text-align: center;">Showing all products</div>
             </div>
+
+            <!-- Category Tabs -->
+            <div class="categories-nav animate-fade-up">
+                <div class="category-tab active" data-category="All"><i class="fas fa-th-large"></i> All</div>
+                <div class="category-tab" data-category="Smartphones"><i class="fas fa-mobile-alt"></i> Phones</div>
+                <div class="category-tab" data-category="Laptops"><i class="fas fa-laptop"></i> Laptops</div>
+                <div class="category-tab" data-category="Gaming"><i class="fas fa-gamepad"></i> Gaming</div>
+                <div class="category-tab" data-category="Audio"><i class="fas fa-headphones"></i> Audio</div>
+                <div class="category-tab" data-category="Accessories"><i class="fas fa-keyboard"></i> Accessories</div>
+            </div>
+
             <div class="solutions-grid" id="api-gigs-container">
                 <!-- Gigs will be loaded here dynamically from API -->
                 <div class="loading-state" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
@@ -247,6 +268,87 @@
             </div>
         </div>
     </footer>
+
+    <!-- Bottom Navigation (Mobile Only) -->
+    <nav class="bottom-nav">
+        <a href="#" class="bottom-nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+        </a>
+        <a href="#" class="bottom-nav-item" style="position: relative;">
+            <i class="fas fa-exchange-alt"></i>
+            <span>Swap</span>
+        </a>
+        <a href="auth.html" class="bottom-nav-item">
+            <i class="fas fa-user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/2348123456789?text=Hello%20MaxSale!%20I%20found%20a%20gadget%20I%20am%20interested%20in." 
+       target="_blank" 
+       id="whatsapp-float" 
+       class="whatsapp-float" 
+       aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="wa-tooltip">Chat with us</span>
+    </a>
+
+    <!-- Product Detail Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close"><i class="fas fa-times"></i></button>
+            <div class="modal-body">
+                <div class="modal-image-side">
+                    <img id="modal-image" src="" alt="Product Image">
+                </div>
+                <div class="modal-info-side">
+                    <div id="modal-tag" class="modal-tag">Sell</div>
+                    <h2 id="modal-title">Product Title</h2>
+                    <p id="modal-description">Product description goes here.</p>
+                    
+                    <div class="modal-specs">
+                        <h3>Specifications</h3>
+                        <ul id="modal-specs-list">
+                            <!-- Specs will be injected here -->
+                        </ul>
+                    </div>
+                    
+                    <div class="modal-details">
+                        <div class="detail-item">
+                            <span class="label">Condition</span>
+                            <span id="modal-condition" class="value">Excellent</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="label">Price</span>
+                            <span id="modal-price" class="value-price">₦0.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-actions" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
+                        <button class="btn btn-primary" id="modal-add-to-cart-btn" style="width: 100%;">Add to Bag</button>
+                        <a href="https://wa.me/2348123456789" target="_blank" class="btn btn-outline" style="width: 100%; border-color: #25D366; color: #25D366; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class="fab fa-whatsapp"></i> Chat Seller
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="api.js"></script>
     <script src="script.js"></script>

@@ -178,7 +178,72 @@ async function loadAdminSuggestions() {
     }
 }
 
+// ── Add Item Logic ───────────────────────────────────────────
+const addItemModal = document.getElementById('add-item-modal');
+const addItemBtn   = document.getElementById('add-item-btn');
+const closeAddModal = document.getElementById('close-add-modal');
+const addItemForm  = document.getElementById('add-item-form');
+
+if (addItemBtn && addItemModal) {
+    addItemBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        addItemModal.style.display = 'flex';
+    });
+}
+
+if (closeAddModal) {
+    closeAddModal.addEventListener('click', () => {
+        addItemModal.style.display = 'none';
+    });
+}
+
+if (addItemForm) {
+    addItemForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = addItemForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+
+        const newItem = {
+            title: document.getElementById('add-title').value,
+            price: document.getElementById('add-price').value,
+            category: document.getElementById('add-category').value,
+            type: document.getElementById('add-type').value,
+            image: document.getElementById('add-image').value,
+            description: 'Manually added via Admin Dashboard.',
+            condition: 'Brand New',
+            specs: ['Added by Admin']
+        };
+
+        try {
+            await window.GadgetAPI.createItem(newItem);
+            addItemForm.reset();
+            addItemModal.style.display = 'none';
+            loadAdminAccessories();
+            updateDashboardStats();
+        } catch (err) {
+            alert('Failed to add item.');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Save Gadget';
+        }
+    });
+}
+
+function updateDashboardStats() {
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const totalUsersEl = document.querySelector('.stats-grid .stat-card:nth-child(1) .stat-details h3');
+    if (totalUsersEl) totalUsersEl.textContent = users.length.toLocaleString();
+
+    // Update active listings count
+    window.GadgetAPI.getItems().then(items => {
+        const listingsEl = document.querySelector('.stats-grid .stat-card:nth-child(4) .stat-details h3');
+        if (listingsEl) listingsEl.textContent = items.length.toLocaleString();
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadAdminAccessories();
     loadAdminSuggestions();
+    updateDashboardStats();
 });

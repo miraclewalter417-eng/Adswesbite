@@ -170,6 +170,51 @@
         </main>
     </div>
 
+    <!-- Add Item Modal -->
+    <div id="add-item-modal" class="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 3000; align-items: center; justify-content: center;">
+        <div class="modal-content" style="background: white; padding: 30px; border-radius: 15px; width: 450px; max-width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.2);">
+            <h2 style="margin-bottom: 20px; font-family: 'Outfit', sans-serif;">Add New Gadget</h2>
+            <form id="add-item-form">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; font-weight: 600;">Product Title</label>
+                    <input type="text" id="add-title" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; font-weight: 600;">Price (e.g. ₦450,000)</label>
+                        <input type="text" id="add-price" required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; font-weight: 600;">Category</label>
+                        <select id="add-category" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                            <option>Smartphones</option>
+                            <option>Laptops</option>
+                            <option>Gaming</option>
+                            <option>Audio</option>
+                            <option>Accessories</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; font-weight: 600;">Type</label>
+                    <select id="add-type" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                        <option>Buy</option>
+                        <option>Sell</option>
+                        <option>Swap</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; margin-bottom: 5px; font-size: 0.9rem; font-weight: 600;">Image URL</label>
+                    <input type="text" id="add-image" value="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="btn btn-export" style="background: var(--primary); color: white; flex: 1;">Save Gadget</button>
+                    <button type="button" id="close-add-modal" class="btn" style="background: #f3f4f6; flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="api.js"></script>
     <script src="admin.js"></script>
 </body>

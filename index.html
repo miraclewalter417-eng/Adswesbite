@@ -1,176 +1,254 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mimi Market</title>
-    <link
-      rel="shortcut icon"
-      href="images/favicon icon.jpeg"
-      type="image/x-icon"
-    />
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaxSale | Buy, Sell & Swap Premium Gadgets</title>
+    <meta name="description" content="MaxSale - The ultimate marketplace to buy, sell, and swap gadgets at the best prices.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  <body>
-    <nav class="navbar">
-      <div class="logo">Mimiads<span>market</span></div>
-
-      <!-- Toggle Button -->
-      <button class="menu-toggle" id="menuToggle">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-
-      <!-- Nav Menu -->
-      <div class="nav-menu" id="navMenu">
-        <div class="user_icon">
-          <a href="#"><i class="fa-solid fa-bookmark"></i></a>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo" style="display: flex; align-items: center; gap: 10px; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--primary);">
+                <i class="fas fa-shopping-cart" style="color: var(--secondary);"></i>
+                <span style="color: var(--text-main);">Max</span><span style="color: var(--primary);">Sale</span>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Marketplace <i class="fas fa-chevron-down"></i></a></li>
+                    <li><a href="#">Sell/Swap</a></li>
+                </ul>
+            </nav>
+            <div class="header-cta">
+                <a href="auth.html" class="btn btn-get-started">Get started</a>
+                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+            </div>
         </div>
-
-        <div class="user_icon">
-          <a href="#"><i class="fa-solid fa-message"></i></a>
-        </div>
-
-        <div class="user_icon">
-          <a href="#"><i class="fa-solid fa-bell"></i></a>
-        </div>
-
-        <div class="user_icon">
-          <a href="#"><i class="fa-solid fa-clipboard-list"></i></a>
-        </div>
-
-        <div class="user_icon">
-          <a href="register.html"><i class="fa-solid fa-user-check"></i></a>
-        </div>
-
-        <div class="nav-actions">
-          <button id="openModal" class="btn-primary">Sell</button>
-        </div>
-      </div>
-    </nav>
-
-    <header class="hero">
-      <h1>What are you <span>looking for?</span></h1>
-
-      <div class="search-container">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search for electronics, jobs, etc..."
-        />
-        <button type="button" onclick="searchAds()">Search</button>
-      </div>
     </header>
 
-    <div class="main-layout">
-      <aside class="sidebar">
-        <h3>Categories</h3>
-        <ul>
-          <li onclick="filterCategory('All')">All Categories</li>
-          <li onclick="filterCategory('Electronics')">Electronics</li>
-          <li onclick="filterCategory('Services')">Services</li>
-          <li onclick="filterCategory('Real Estate')">Real Estate</li>
-        </ul>
-      </aside>
+    <!-- Mobile Nav Overlay -->
+    <div class="nav-overlay" id="nav-overlay"></div>
 
-      <section class="feed">
-        <h2 id="feedTitle" class="feed_head">Featured Ads</h2>
-        <div class="ads-grid" id="adsGrid"></div>
-      </section>
-    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content animate-fade-up">
+                <h1>The #1 Marketplace to Buy, Sell & Swap Gadgets <span class="accent-text">🇳🇬</span></h1>
+                <p>Welcome to MaxSale. Find the latest smartphones, laptops, and gaming consoles at unbeatable prices. Join our community for seamless transactions and amazing deals in Naira.</p>
+                <div class="hero-btns">
+                    <button class="btn btn-primary">Start Swapping</button>
+                    <button class="btn btn-outline">Browse Market</button>
+                </div>
+            </div>
+            <div class="hero-image animate-fade-up" style="animation-delay: 0.2s;">
+                <!-- Placeholder for the illustration -->
+                <div class="illustration-placeholder">
+                    <img src="https://images.unsplash.com/photo-1491933382434-500287f9b54b?auto=format&fit=crop&w=800&q=80" alt="Gadget Marketplace" style="border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.3);">
+                </div>
+            </div>
+        </div>
+        <!-- Wave Separator -->
+        <div class="wave-container">
+            <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ffffff" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,250.7C960,235,1056,181,1152,165.3C1248,149,1344,171,1392,181.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </section>
 
-    <!-- Modal -->
-    <div id="adModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2 class="modal_head">Post a New Ad</h2>
+    <!-- Solutions Section -->
+    <section class="solutions">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Featured Gadgets</h2>
+                <p>Discover top-tier tech available to buy, sell, or swap at MaxSale.</p>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-container animate-fade-up" style="max-width: 600px; margin: 0 auto 50px; position: relative; z-index: 100;">
+                <div class="search-input-wrapper" style="position: relative;">
+                    <i class="fas fa-search" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; z-index: 10;"></i>
+                    <input type="text" id="product-search" placeholder="Search for gadgets, specs, or models..." style="width: 100%; padding: 18px 55px 18px 55px; border-radius: 50px; border: 2px solid transparent; font-size: 1rem; outline: none; transition: var(--ease); box-shadow: var(--shadow); background: white;">
+                    <button id="clear-search" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: #F3F4F6; border: none; width: 30px; height: 30px; border-radius: 50%; color: var(--text-muted); cursor: pointer; display: none; align-items: center; justify-content: center; transition: var(--ease); z-index: 10;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <!-- Instant Suggestions Dropdown -->
+                <div id="search-suggestions" style="position: absolute; top: 100%; left: 0; width: 100%; background: white; border-radius: 15px; margin-top: 10px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); border: 1px solid var(--border-color); overflow: hidden; display: none; z-index: 1000;">
+                    <!-- Results will be injected here -->
+                </div>
 
-        <form id="adForm">
-          <input type="text" id="adTitle" placeholder="Ad Title" required />
-          <input type="number" id="adPrice" placeholder="Price (₦)" required />
+                <div id="search-count" style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted); text-align: center;">Showing all products</div>
+            </div>
+            <div class="solutions-grid" id="api-gigs-container">
+                <!-- Gigs will be loaded here dynamically from API -->
+                <div class="loading-state" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary);"></i>
+                    <p style="margin-top: 15px;">Loading accessories from marketplace...</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-          <select id="adCategory">
-            <option value="Electronics">Electronics</option>
-            <option value="Services">Services</option>
-            <option value="Real Estate">Real Estate</option>
-          </select>
+    <!-- Employer Section -->
+    <section class="info-section bg-light">
+        <div class="container info-container">
+            <div class="info-image animate-fade-up">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80" alt="Buyer Illustration" style="border-radius: 20px; box-shadow: var(--shadow);">
+            </div>
+            <div class="info-content animate-fade-up">
+                <span class="badge">For Buyers</span>
+                <h2>Find the Best Deals on Accessories</h2>
+                <p>Browse thousands of premium cases, chargers, and bands. Ensure quality and authenticity with our verified sellers.</p>
+                <ul class="info-list">
+                    <li><i class="fas fa-check-circle"></i> High Quality Products</li>
+                    <li><i class="fas fa-check-circle"></i> Secure Transactions</li>
+                    <li><i class="fas fa-check-circle"></i> 24/7 Support</li>
+                </ul>
+                <button class="btn btn-primary" style="background: var(--primary); color: white;">Start Shopping</button>
+            </div>
+        </div>
+    </section>
 
-          <textarea
-            id="adDesc"
-            placeholder="Description"
-            rows="4"
-            required
-          ></textarea>
+    <!-- Freelancer Section -->
+    <section class="info-section">
+        <div class="container info-container reverse">
+            <div class="info-content animate-fade-up">
+                <span class="badge badge-alt">For Sellers & Swappers</span>
+                <h2>Turn Unused Gadgets into Cash</h2>
+                <p>Join our community and list your unused tech accessories. Sell them for cash or swap them for something you actually need.</p>
+                <ul class="info-list">
+                    <li><i class="fas fa-check-circle"></i> Easy Listing Process</li>
+                    <li><i class="fas fa-check-circle"></i> Secure Payments</li>
+                    <li><i class="fas fa-check-circle"></i> Verified Community</li>
+                </ul>
+                <button class="btn btn-primary" style="background: var(--primary); color: white;">Start Selling</button>
+            </div>
+            <div class="info-image animate-fade-up">
+                <img src="https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=600&q=80" alt="Seller Illustration" style="border-radius: 20px; box-shadow: var(--shadow);">
+            </div>
+        </div>
+    </section>
 
-          <input type="file" id="adImage" accept="image/*" />
+    <!-- Testimonials -->
+    <section class="testimonials bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>What Our Users Say</h2>
+                <p>Join thousands of satisfied tech enthusiasts in our community.</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"MaxSale helped me trade my old iPad for a MacBook Pro seamlessly. The prices are fair and the process is secure!"</p>
+                    <div class="user-info">
+                        <h4>John Doe</h4>
+                        <span>Tech Enthusiast</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-          <button type="submit" class="btn-primary">Publish Now</button>
-        </form>
-      </div>
-    </div>
+    <!-- Suggestion Section -->
+    <section class="suggestion-section bg-light" style="padding: 80px 0;">
+        <div class="container">
+            <div class="suggestion-card animate-fade-up" style="background: var(--surface); padding: 50px; border-radius: var(--radius); box-shadow: var(--shadow); text-align: center; max-width: 800px; margin: 0 auto; border: 1px solid var(--border-color);">
+                <div class="suggestion-content" style="margin-bottom: 30px;">
+                    <h2 style="margin-bottom: 15px;">Can't find what you're looking for?</h2>
+                    <p style="color: var(--text-muted);">Suggest a gadget or accessory you'd like to see in our marketplace, and we'll notify our sellers!</p>
+                </div>
+                <form id="suggestion-form" style="display: flex; flex-direction: column; gap: 15px; max-width: 500px; margin: 0 auto;">
+                    <div class="form-group">
+                        <input type="text" id="suggest-product" placeholder="Product Name (e.g. RTX 4090)" required style="width: 100%; padding: 14px 20px; border-radius: 12px; border: 1px solid var(--border-color); font-family: inherit; font-size: 1rem; outline: none; transition: var(--ease);">
+                    </div>
+                    <div class="form-group">
+                        <select id="suggest-type" required style="width: 100%; padding: 14px 20px; border-radius: 12px; border: 1px solid var(--border-color); font-family: inherit; font-size: 1rem; outline: none; transition: var(--ease); background: white;">
+                            <option value="" disabled selected>Gadget Category</option>
+                            <option value="Smartphones">Smartphones</option>
+                            <option value="Laptops">Laptops</option>
+                            <option value="Gaming">Gaming</option>
+                            <option value="Audio">Audio</option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background: var(--primary); color: white; border: none; padding: 14px; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: var(--ease);">Send Suggestion</button>
+                </form>
+                <div id="suggestion-message" style="display:none; margin-top: 25px; color: var(--secondary); font-weight: 600; padding: 15px; background: rgba(22, 163, 74, 0.1); border-radius: 10px;">
+                    <i class="fas fa-check-circle"></i> Thank you! Your suggestion has been received.
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-section">
-          <h2 class="logo">AdPromoter</h2>
-          <p>
-            We help brands grow with high-converting digital advertising
-            solutions. Reach your audience. Increase revenue. Scale faster.
-          </p>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo" style="display: flex; align-items: center; gap: 10px; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--white); margin-bottom: 20px;">
+                        <i class="fas fa-shopping-cart" style="color: var(--secondary);"></i>
+                        <span>Max</span><span style="color: var(--primary-light);">Sale</span>
+                    </div>
+                    <p>MaxSale is the leading platform for buying, selling, and swapping premium gadgets and electronics.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get the latest updates and offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Email Address">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom text-center">
+                <p>&copy; 2026 MaxSale. All Rights Reserved.</p>
+            </div>
         </div>
-
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Advertise</a></li>
-            <li><a href="#">Pricing</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h3>Services</h3>
-          <ul>
-            <li><a href="#">Banner Ads</a></li>
-            <li><a href="#">Sponsored Posts</a></li>
-            <li><a href="#">Landing Page Ads</a></li>
-            <li><a href="#">Social Media Ads</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h3>Subscribe</h3>
-          <form id="newsletterForm">
-            <input type="email" placeholder="Enter your email" required />
-            <button type="submit">Subscribe</button>
-          </form>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p>© 2026 AdPromoter. All Rights Reserved.</p>
-        <button id="backToTop">↑</button>
-      </div>
     </footer>
 
+    <script src="api.js"></script>
     <script src="script.js"></script>
-
-    <!-- Toggle Script -->
-    <script>
-      const menuToggle = document.getElementById("menuToggle");
-      const navMenu = document.getElementById("navMenu");
-
-      menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-      });
-    </script>
-  </body>
+</body>
 </html>

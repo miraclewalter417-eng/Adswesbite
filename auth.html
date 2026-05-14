@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | eTrend Gigs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(180deg, #022c22 50%, #d1fae5 50%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background: #f4f4f4;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .auth-card h2 {
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #000;
+        }
+
+        .toggle-container {
+            display: flex;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .toggle-btn.active {
+            background: #10b981;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            background: #f0f0f0;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #10b981;
+        }
+
+        .forgot-pass {
+            display: block;
+            text-align: left;
+            margin-top: -10px;
+            margin-bottom: 25px;
+            color: #10b981;
+            font-size: 0.9rem;
+        }
+
+        .btn-auth {
+            width: 100%;
+            background: #10b981;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .auth-footer {
+            font-size: 0.95rem;
+        }
+
+        .auth-footer a {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* Hide Signup by default */
+        #signup-form {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-card">
+        <h2 id="auth-title">Login</h2>
+        
+        <div class="toggle-container">
+            <div class="toggle-btn active" onclick="showLogin()">Login</div>
+            <div class="toggle-btn" onclick="showSignup()">Signup</div>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form">
+            <div class="form-group">
+                <input type="text" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <a href="#" class="forgot-pass">Forgot password?</a>
+            <button type="submit" class="btn btn-auth">Login</button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signup-form">
+            <div class="form-group">
+                <input type="text" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Email Address" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Confirm Password" required>
+            </div>
+            <button type="submit" class="btn btn-auth">Signup</button>
+        </form>
+
+        <div class="auth-footer">
+            <span id="footer-text">Not a member?</span> <a href="javascript:void(0)" onclick="toggleAuth()">Signup now</a>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const authTitle = document.getElementById('auth-title');
+        const footerText = document.getElementById('footer-text');
+        const toggleBtns = document.querySelectorAll('.toggle-btn');
+
+        // Initialize Local Storage
+        if (!localStorage.getItem('users')) {
+            localStorage.setItem('users', JSON.stringify([
+                { username: 'admin', email: 'admin@etrendgigs.com', password: 'password123', role: 'admin' }
+            ]));
+        }
+
+        function showLogin() {
+            loginForm.style.display = 'block';
+            signupForm.style.display = 'none';
+            authTitle.innerText = 'Login';
+            footerText.innerText = 'Not a member?';
+            toggleBtns[0].classList.add('active');
+            toggleBtns[1].classList.remove('active');
+        }
+
+        function showSignup() {
+            loginForm.style.display = 'none';
+            signupForm.style.display = 'block';
+            authTitle.innerText = 'Signup';
+            footerText.innerText = 'Already a member?';
+            toggleBtns[0].classList.remove('active');
+            toggleBtns[1].classList.add('active');
+        }
+
+        function toggleAuth() {
+            if (loginForm.style.display === 'none') {
+                showLogin();
+            } else {
+                showSignup();
+            }
+        }
+
+        // Signup Logic
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = signupForm.querySelectorAll('input')[0].value;
+            const email = signupForm.querySelectorAll('input')[1].value;
+            const password = signupForm.querySelectorAll('input')[2].value;
+            const confirmPass = signupForm.querySelectorAll('input')[3].value;
+
+            if (password !== confirmPass) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users'));
+            if (users.find(u => u.username === username)) {
+                alert('Username already exists!');
+                return;
+            }
+
+            users.push({ username, email, password, role: 'user' });
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Signup successful! Please login.');
+            showLogin();
+        });
+
+        // Login Logic
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = loginForm.querySelectorAll('input')[0].value;
+            const password = loginForm.querySelectorAll('input')[1].value;
+
+            const users = JSON.parse(localStorage.getItem('users'));
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                localStorage.setItem('isLoggedIn', 'true');
+                
+                if (user.role === 'admin') {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = 'index.html';
+                }
+            } else {
+                alert('Invalid username or password!');
+            }
+        });
+    </script>
+</body>
+</html>

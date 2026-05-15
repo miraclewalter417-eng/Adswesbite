@@ -111,10 +111,24 @@ const api = {
     createItem: async (itemData) => {
         await delay(800);
         const data = JSON.parse(localStorage.getItem(DB_KEY));
-        const newItem = { id: Date.now(), ...itemData };
+        const newItem = { 
+            id: Date.now(), 
+            isSoldOut: false,
+            ...itemData 
+        };
         data.push(newItem);
         localStorage.setItem(DB_KEY, JSON.stringify(data));
         return newItem;
+    },
+    toggleSoldStatus: async (id) => {
+        await delay(500);
+        const data = JSON.parse(localStorage.getItem(DB_KEY));
+        const item = data.find(i => i.id === id);
+        if (item) {
+            item.isSoldOut = !item.isSoldOut;
+            localStorage.setItem(DB_KEY, JSON.stringify(data));
+        }
+        return item;
     },
     deleteItem: async (id) => {
         await delay(600);
@@ -122,6 +136,17 @@ const api = {
         data = data.filter(item => item.id !== id);
         localStorage.setItem(DB_KEY, JSON.stringify(data));
         return { success: true };
+    },
+    updateItem: async (id, updateData) => {
+        await delay(600);
+        const data = JSON.parse(localStorage.getItem(DB_KEY));
+        const index = data.findIndex(i => i.id === id);
+        if (index !== -1) {
+            data[index] = { ...data[index], ...updateData };
+            localStorage.setItem(DB_KEY, JSON.stringify(data));
+            return data[index];
+        }
+        throw new Error('Item not found');
     },
     getSuggestions: async () => {
         await delay(500);

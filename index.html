@@ -15,6 +15,12 @@
 </head>
 <body>
 
+    <!-- Global Loader -->
+    <div id="page-loader" class="page-loader">
+        <div class="spinner"></div>
+        <p>Loading MaxSale...</p>
+    </div>
+
     <!-- Header -->
     <header class="header">
         <div class="container header-container">
@@ -35,19 +41,35 @@
                         <i class="far fa-heart"></i>
                         <span class="badge-dot" style="position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: var(--primary); border-radius: 50%; border: 2px solid white;"></span>
                     </a>
-                    <a href="#" class="header-icon" style="position: relative; color: var(--text-main); font-size: 1.2rem;">
+                    <a href="#" id="cart-icon-btn" class="header-icon" style="position: relative; color: var(--text-main); font-size: 1.2rem;">
                         <i class="fas fa-shopping-bag"></i>
                         <span class="badge-count" style="position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; font-size: 0.65rem; padding: 2px 5px; border-radius: 10px; font-weight: 700; min-width: 18px; text-align: center;">0</span>
                     </a>
                 </div>
-                <a href="auth.html" class="btn btn-get-started">Get started</a>
                 <button class="menu-toggle"><i class="fas fa-bars"></i></button>
             </div>
         </div>
     </header>
 
-    <!-- Mobile Nav Overlay -->
+    <!-- Mobile Navigation Sidebar -->
     <div class="nav-overlay" id="nav-overlay"></div>
+    <div class="mobile-nav-container" id="mobile-nav">
+        <div class="mobile-nav-logo">
+            <div class="logo">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Max<span class="accent">Sale</span></span>
+            </div>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#marketplace"><i class="fas fa-th-large"></i> Marketplace</a></li>
+            <li><a href="#how-it-works"><i class="fas fa-info-circle"></i> How it Works</a></li>
+            <li><a href="admin.html"><i class="fas fa-user-shield"></i> Admin Panel</a></li>
+            <li><a href="#"><i class="fas fa-headset"></i> Support</a></li>
+        </ul>
+        <div style="margin-top:auto; padding-top:20px; border-top:1px solid #eee;">
+            <p style="font-size:0.8rem; color:#999;">© 2026 MaxSale Marketplace</p>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -78,7 +100,7 @@
     <!-- Solutions Section -->
     <section class="solutions">
         <div class="container">
-            <div class="section-header text-center">
+            <div class="section-header text-center animate-fade-up">
                 <h2>Featured Gadgets</h2>
                 <p>Discover top-tier tech available to buy, sell, or swap at MaxSale.</p>
             </div>
@@ -164,11 +186,11 @@
     <!-- Testimonials -->
     <section class="testimonials bg-light">
         <div class="container">
-            <div class="section-header text-center">
+            <div class="section-header text-center animate-fade-up">
                 <h2>What Our Users Say</h2>
                 <p>Join thousands of satisfied tech enthusiasts in our community.</p>
             </div>
-            <div class="testimonial-slider">
+            <div class="testimonial-slider animate-fade-up" style="animation-delay: 0.2s;">
                 <div class="testimonial-card">
                     <div class="stars">
                         <i class="fas fa-star"></i>
@@ -223,7 +245,7 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-about">
+                <div class="footer-about animate-fade-up">
                     <div class="logo" style="display: flex; align-items: center; gap: 10px; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--white); margin-bottom: 20px;">
                         <i class="fas fa-shopping-cart" style="color: var(--secondary);"></i>
                         <span>Max</span><span style="color: var(--primary-light);">Sale</span>
@@ -236,7 +258,7 @@
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                <div class="footer-links">
+                <div class="footer-links animate-fade-up" style="animation-delay: 0.1s;">
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#">Home</a></li>
@@ -245,7 +267,7 @@
                         <li><a href="#">Contact Us</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
+                <div class="footer-links animate-fade-up" style="animation-delay: 0.2s;">
                     <h4>Support</h4>
                     <ul>
                         <li><a href="#">FAQ</a></li>
@@ -254,7 +276,7 @@
                         <li><a href="#">Help Center</a></li>
                     </ul>
                 </div>
-                <div class="footer-newsletter">
+                <div class="footer-newsletter animate-fade-up" style="animation-delay: 0.3s;">
                     <h4>Newsletter</h4>
                     <p>Subscribe to get the latest updates and offers.</p>
                     <form class="newsletter-form">
@@ -283,14 +305,55 @@
             <i class="fas fa-exchange-alt"></i>
             <span>Swap</span>
         </a>
-        <a href="auth.html" class="bottom-nav-item">
+        <a href="admin.html" class="bottom-nav-item">
             <i class="fas fa-user"></i>
-            <span>Account</span>
+            <span>Admin</span>
         </a>
     </nav>
 
     <!-- Toast Notification Container -->
     <div class="toast-container" id="toast-container"></div>
+
+    <!-- ============================================================
+         CART DRAWER
+    ============================================================ -->
+    <div id="cart-overlay" class="cart-overlay"></div>
+    <aside id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <i class="fas fa-shopping-bag" style="color:var(--primary);"></i>
+                <h3>My Bag <span id="cart-item-count" class="cart-count-badge">0</span></h3>
+            </div>
+            <button id="cart-close-btn" class="cart-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div id="cart-items-list" class="cart-items-list">
+            <!-- Items injected by JS -->
+        </div>
+
+        <div id="cart-empty" class="cart-empty" style="display:none;">
+            <i class="fas fa-shopping-cart"></i>
+            <p>Your bag is empty</p>
+            <small>Add some gadgets to get started!</small>
+        </div>
+
+        <div id="cart-footer" class="cart-footer">
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cart-total">₦0</span>
+            </div>
+            <a href="https://wa.me/2348123456789?text=Hello%20MaxSale!%20I%20want%20to%20checkout%20my%20order." 
+               target="_blank" 
+               class="btn btn-primary cart-checkout-btn">
+                <i class="fab fa-whatsapp"></i> Checkout via WhatsApp
+            </a>
+            <button id="cart-clear-btn" class="cart-clear-btn">
+                <i class="fas fa-trash"></i> Clear Bag
+            </button>
+        </div>
+    </aside>
 
     <!-- Back to Top Button -->
     <button class="back-to-top" id="back-to-top">
@@ -298,7 +361,7 @@
     </button>
 
     <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/2348123456789?text=Hello%20MaxSale!%20I%20found%20a%20gadget%20I%20am%20interested%20in." 
+    <a href="https://wa.me/23487077889561?text=Hello%20MaxSale!%20I%20found%20a%20gadget%20I%20am%20interested%20in." 
        target="_blank" 
        id="whatsapp-float" 
        class="whatsapp-float" 

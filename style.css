@@ -417,8 +417,91 @@ h1, h2, h3, h4, h5, h6 {
     gap: 20px;
 }
 
-.logo img {
-    height: 38px;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.logo i {
+    font-size: 1.8rem;
+    color: var(--secondary);
+    filter: drop-shadow(0 4px 10px rgba(22, 163, 74, 0.2));
+}
+
+.logo span {
+    color: var(--text-main);
+    letter-spacing: -0.5px;
+}
+
+.logo .accent {
+    color: var(--primary);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-btn {
+    position: relative;
+    color: var(--text-main);
+    font-size: 1.25rem;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    transition: var(--ease);
+    background: transparent;
+}
+
+.icon-btn:hover {
+    background: var(--bg-dark);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.icon-btn .badge-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 10px;
+    height: 10px;
+    background: var(--primary);
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.icon-btn .badge-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--primary);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    min-width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.2);
 }
 
 /* Desktop nav */
@@ -1915,3 +1998,72 @@ h1, h2, h3, h4, h5, h6 {
         height: 40px;
     }
 }
+
+/* ── MOBILE NAVIGATION OVERHAUL ────────────────── */
+.mobile-nav-container {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100%;
+    background: white;
+    z-index: 4000;
+    padding: 40px 30px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 20px 0 60px rgba(0,0,0,0.15);
+}
+
+.mobile-nav-container.active { left: 0; }
+
+.nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    z-index: 3999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.mobile-nav-logo { margin-bottom: 40px; }
+
+.mobile-nav-links { list-style: none; padding: 0; flex: 1; }
+.mobile-nav-links li { margin-bottom: 20px; transform: translateX(-20px); opacity: 0; transition: 0.4s; }
+.mobile-nav-container.active .mobile-nav-links li { transform: translateX(0); opacity: 1; }
+.mobile-nav-container.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
+.mobile-nav-container.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.2s; }
+.mobile-nav-container.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.3s; }
+.mobile-nav-container.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.4s; }
+
+.mobile-nav-links a { 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    color: var(--text-main); 
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+}
+
+.mobile-nav-links i { width: 24px; color: var(--primary); }
+
+@media (max-width: 992px) {
+    .nav { display: none; }
+    .menu-toggle { display: block; }
+}
+
+@media (max-width: 768px) {
+    .header { padding: 15px 0; }
+    .logo { font-size: 1.4rem; }
+    .header-icons .icon-btn[title="Wishlist"] { display: none; } /* Hide wishlist on very small screens to save space */
+}
+

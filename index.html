@@ -24,29 +24,31 @@
     <!-- Header -->
     <header class="header">
         <div class="container header-container">
-            <div class="logo" style="display: flex; align-items: center; gap: 10px; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--primary);">
-                <i class="fas fa-shopping-cart" style="color: var(--secondary);"></i>
-                <span style="color: var(--text-main);">Max</span><span style="color: var(--primary);">Sale</span>
-            </div>
+            <a href="index.html" class="logo">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Max<span class="accent">Sale</span></span>
+            </a>
             <nav class="nav">
                 <ul>
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#">Marketplace <i class="fas fa-chevron-down"></i></a></li>
-                    <li><a href="#">Sell/Swap</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="#marketplace">Marketplace</a></li>
+                    <!-- <li><a href="admin.html">Admin Panel</a></li> -->
                 </ul>
             </nav>
-            <div class="header-cta">
-                <div class="header-icons" style="display: flex; gap: 20px; align-items: center; margin-right: 15px;">
-                    <a href="#" class="header-icon" style="position: relative; color: var(--text-main); font-size: 1.2rem;">
+            <div class="header-right">
+                <div class="header-icons">
+                    <a href="#" class="icon-btn" title="Wishlist">
                         <i class="far fa-heart"></i>
-                        <span class="badge-dot" style="position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: var(--primary); border-radius: 50%; border: 2px solid white;"></span>
+                        <span class="badge-dot"></span>
                     </a>
-                    <a href="#" id="cart-icon-btn" class="header-icon" style="position: relative; color: var(--text-main); font-size: 1.2rem;">
+                    <a href="#" id="cart-icon-btn" class="icon-btn" title="Cart">
                         <i class="fas fa-shopping-bag"></i>
-                        <span class="badge-count" style="position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; font-size: 0.65rem; padding: 2px 5px; border-radius: 10px; font-weight: 700; min-width: 18px; text-align: center;">0</span>
+                        <span class="badge-count">0</span>
                     </a>
                 </div>
-                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <button class="menu-toggle" id="mobile-toggle-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </div>
     </header>
@@ -98,7 +100,7 @@
     </section>
 
     <!-- Solutions Section -->
-    <section class="solutions">
+    <section class="solutions" id="marketplace">
         <div class="container">
             <div class="section-header text-center animate-fade-up">
                 <h2>Featured Gadgets</h2>
@@ -143,8 +145,8 @@
         </div>
     </section>
 
-    <!-- Employer Section -->
-    <section class="info-section bg-light">
+    <!-- How It Works Section -->
+    <section class="info-section bg-light" id="how-it-works">
         <div class="container info-container">
             <div class="info-image animate-fade-up">
                 <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80" alt="Buyer Illustration" style="border-radius: 20px; box-shadow: var(--shadow);">

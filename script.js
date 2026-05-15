@@ -3,7 +3,7 @@
 */
 
 // ── Mobile Nav ────────────────────────────────────────────────
-const menuToggle = document.querySelector('.menu-toggle');
+const menuToggle = document.getElementById('mobile-toggle-btn') || document.querySelector('.menu-toggle');
 const mobileNav  = document.getElementById('mobile-nav');
 const navOverlay = document.getElementById('nav-overlay');
 
